@@ -137,7 +137,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         if(_root==null)
             return;
         else if(find(dato))
-            _root=deleteAux(dato, _root, null);
+            _root=deleteAux(dato, _root);
     }
     
     /**
@@ -150,7 +150,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         if(pNodo==null)
             return null;
         else if(find(dato))
-            pNodo=deleteAux(dato, pNodo, null);
+            pNodo=deleteAux(dato, pNodo);
         return pNodo;
     }
     
@@ -161,7 +161,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
      * @param padre dato tipo NodeB que apunta al padre del nodo que se va eliminar
      * @return retorna lo que va a tomar el valor de la raiz
      */
-    private NodoB deleteAux(dp dato, NodoB pNodo, NodoB padre){
+    private NodoB deleteAux(dp dato, NodoB pNodo){
         if(pNodo.getDato().equals(dato)){
             if(pNodo.getHizq()==null)
                 return pNodo.getHder();
@@ -186,11 +186,11 @@ public class Arbol_binario <dp extends Comparable<dp>> {
             }
         }
         else if(pNodo.getDato().compareTo(dato)>0){
-            pNodo.setHizq(deleteAux(dato, pNodo.getHizq(), pNodo));
+            pNodo.setHizq(deleteAux(dato, pNodo.getHizq()));
             return pNodo;
         }
         else{
-            pNodo.setHder(deleteAux(dato, pNodo.getHder(), pNodo));
+            pNodo.setHder(deleteAux(dato, pNodo.getHder()));
             return pNodo;
         }
     }

@@ -16,6 +16,24 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario{
 
     @Override
     public void insert(Comparable dato) {
-        super.insert(dato);
+        _root=super.insert(dato, _root);
+        check();
+    }
+    
+    private void check(){
+        if (_root.getColor()==1)
+            changeColor(_root);
+        checkAux(_root);
+    }
+    
+    private void checkAux(NodoB pNodo){
+        
+    }
+    
+    private void changeColor(NodoB pNodo){
+        if(pNodo.getColor()==1)
+            pNodo.setColor(2);
+        else
+            pNodo.setColor(1);
     }
 }
