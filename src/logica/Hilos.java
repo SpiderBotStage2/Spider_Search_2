@@ -9,6 +9,8 @@ package logica;
  *
  * @author Gustavo
  */
-public class Hilos {
+public class Hilos 
+{
+   Heap nuevo= new Heap(); 
     
 }
