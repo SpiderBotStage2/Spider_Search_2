@@ -11,9 +11,9 @@ package logica;
  */
 public class Heap {
     
-    private int _root=0;
+    private static final int _root=0;
     private int _tail=_root;
-    private int _MaxSize=0;
+    private int _MaxSize=1;
     private static final double _growP=2;
     private int _depthSize=0;
     private String[] _arreglo= new String[_MaxSize];
@@ -27,16 +27,18 @@ public class Heap {
     }
     
     private void check(){
-        checkAux(_root*2);
+        if (_tail==_MaxSize)
+            return;
         checkAux((_root*2)+1);
+        checkAux((_root*2)+2);
     }
     
     private void checkAux(int pHijo){
-        if(_arreglo[pHijo]==null)
+        if(pHijo>= _MaxSize)
             return;
-        checkAux(pHijo*2);
-        checkAux((pHijo*2) +1);
-        if(_arreglo[pHijo/2].compareTo(_arreglo[pHijo])>0)
+        checkAux((pHijo*2)+1);
+        checkAux((pHijo*2) +2);
+        if(_arreglo[pHijo]!=null && _arreglo[pHijo/2].compareTo(_arreglo[pHijo])>0)
             swap(pHijo);
     }
     
@@ -62,19 +64,20 @@ public class Heap {
     }
     
     private void printAux(int pIndice){
-        if(_arreglo[pIndice]==null)
+        if(pIndice>=_MaxSize)
             return;
-        printAux(pIndice*2);
-        System.out.println(_arreglo[pIndice]);
         printAux((pIndice*2)+1);
+        System.out.println(_arreglo[pIndice]);
+        printAux((pIndice*2)+2);
     }
     
     public static void main(String[] args) {
-        Heap nuevo= new Heap();
-        nuevo.insert("1");
-        nuevo.insert("5");
-        nuevo.insert("10");
-        nuevo.insert("2");
+        Heap nuevo = new Heap();
+        nuevo.insert("hola");
+        nuevo.insert("mundo");
+        nuevo.insert("como");
+        nuevo.insert("estan");
+        nuevo.insert("putabida");
         nuevo.print();
     }
 }

@@ -17,18 +17,20 @@ public class NodoUrl <dp extends Comparable<dp>> extends NodoB{
     private Nodo indiceCt;
     
     /**
-     * contructor que recibe un pData que seria lo que se quiere ingresar
-     * en este caso la palabra; recibe un Url padre que nos indica de que 
-     * url proviene esa palabra.
-     * @param pData
-     * @param Urlpadre 
-     */
-    public NodoUrl(dp pData, String Urlpadre) {
+     * contructor que recibe la palabra, el url o direccion en disco del archivo
+     * y la cantidad de veces de aparicion de la palabra
+     * @param pData dato String que recibe la palabra que se va a ingresar
+     * @param Urlpadre dato String que recibe el Url de donde se encontro,
+     * tambien pueden ser ubicaciones en disco duro de archivos
+     * @param cantAp la cantidad total de veces que aparecio la palabra en 
+     * ese archivo.
+     * */
+    public NodoUrl(String pData, String Urlpadre, int cantAp) {
         super(pData);
         this.Urlpadre= new ListaSdoble();
         this.countPpage= new ListaSdoble();
         this.Urlpadre.enQueue(Urlpadre);
-        this.countPpage.enQueue(1);
+        this.countPpage.enQueue(cantAp);
         indiceCt= this.countPpage.getHead();
     }
 
@@ -89,13 +91,14 @@ public class NodoUrl <dp extends Comparable<dp>> extends NodoB{
     
     /**
      * metodo para ingresar un nuevo padre a la keyword.
-     * @param Urlpadre dato de entra del Url padre
+     * @param pUrlpadre dato de entra del Url padre
+     * @param pCantAp dato int que recive la cantidad de veces
+     * que aparecio la palabra
      */
-    public void setUrlsPadre(String Urlpadre){
-        indiceCt.setNext(new Nodo(0));
+    public void insertUrlsPadre(String pUrlpadre, int pCantAp){
+        indiceCt.setNext(new Nodo(pCantAp));
         indiceCt= indiceCt.getNext();
         this.Urlpadre.enQueue(Urlpadre);
-        upCount();
     }
     
     /**
@@ -115,22 +118,7 @@ public class NodoUrl <dp extends Comparable<dp>> extends NodoB{
         return countPpage;
     }
     
-    /**
-     * metodo para aumentar la cuenta de la cantidad de veces que 
-     * se encontro la palabra en la pagina indicada.
-     */
-    public void upCount(){
-        indiceCt.setData((int)indiceCt.getData()+1);
-    }
     
-    /**
-     * establece de forma manual la cantidad de veces que se encontro la 
-     * palabra
-     * @param i 
-     */
-    public void setCount(int i){
-        indiceCt.setData(i);
-    }
     
     /**
      * retorna la cantidad de padres que existen en un nodo
