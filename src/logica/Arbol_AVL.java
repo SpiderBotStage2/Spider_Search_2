@@ -15,109 +15,56 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
     private NodoUrl _root;
     
     /**
-     * metodo especial para ingresar nodos en un arbol AVL.
-     * @param pNodo dato de la clase NodoUrl.
+     * metodo especial para ingresar datos en una rbol AVL
+     * @param pDato dato que se ingres ay pertenece a la clase NodoUrl
      */
-    public void insert(NodoUrl pNodo) {
-        int lastCantP=insertAux(pNodo, _root);
+    public void insert(NodoUrl pDato){
+        if (_root==null)
+            _root=pDato;
+        else
+            insertAux( pDato, _root);
+        if(isLeft(pDato))
+            reLocate(pDato);
         check();
-        if(isLeft(pNodo,lastCantP)!=false && (pNodo.LengthP()>_root.LengthP())){
-            outSide(pNodo);
-        }
     }
     
-    public int insertAux(NodoUrl pNodoToIn, NodoUrl pNodo){
-        int lastCantP;
-        if(pNodoToIn.LengthP()<pNodo.LengthP()){   
-            if((NodoUrl)pNodo.getHizq()==null){
-                pNodo.setHizq(pNodoToIn);
-                ((NodoUrl)pNodo.getHizq()).setPadre(pNodo);
+    /**
+     * metodo para ingresar datos en un arbol de manera recursiva.
+     * @param pDato dato que se ingresa perteneciente a la clase NodoUrl.
+     * @param pNodo dato padre para recursionar, pertenece a la clase 
+     * NodoUrl.
+     */
+    private void insertAux(NodoUrl pDato, NodoUrl pNodo){
+        if (pNodo.LengthP()==pDato.LengthP()){
+            if(pNodo.getDato().compareTo(pDato.getDato())==0)
+                pNodo=pDato;
+            else if(pNodo.getDato().compareTo(pDato.getDato())<0){
+                overPlaceIzq(pDato, pNodo);
             }
             else
-                insertAux(pNodoToIn,(NodoUrl)pNodo.getHizq());
-            lastCantP=0;
+                overPlaceDer(pDato, pNodo);
         }
-        else if (pNodoToIn.LengthP()>pNodo.LengthP()){
-            if((NodoUrl)pNodo.getHder()==null){
-                pNodo.setHder(pNodoToIn);
-                ((NodoUrl)pNodo.getHder()).setPadre(pNodo);
-            }
-            else
-                insertAux(pNodoToIn,(NodoUrl)pNodo.getHder());
-            lastCantP=0;
-        }
-        
         else{
-            if(pNodoToIn.getDato().compareTo(pNodo)==0){
-                lastCantP=pNodoToIn.LengthP();
-                pNodo=pNodoToIn;
-            }
-            
-            else if(pNodoToIn.LengthP()<pNodo.LengthP()){   
-                if((NodoUrl)pNodo.getHizq()==null){
-                    pNodo.setHizq(pNodoToIn);
+            if(pNodo.LengthP()<pDato.LengthP()){   
+                if(pNodo.getHizq()==null){
+                    pNodo.setHizq(pDato);
                     ((NodoUrl)pNodo.getHizq()).setPadre(pNodo);
                 }
                 else
-                    insertAux(pNodoToIn,(NodoUrl)pNodo.getHizq());
-                lastCantP=0;
+                    insertAux(pDato, (NodoUrl)pNodo.getHizq());
             }
-            
-            else if (pNodoToIn.LengthP()>pNodo.LengthP()){
-                if((NodoUrl)pNodo.getHder()==null){
-                    pNodo.setHder(pNodoToIn);
+            else{
+                if(pNodo.getHder()==null){
+                    pNodo.setHder(pDato);
                     ((NodoUrl)pNodo.getHder()).setPadre(pNodo);
                 }
                 else
-                    insertAux(pNodoToIn,(NodoUrl)pNodo.getHder());
-                lastCantP=0;
+                    insertAux(pDato,(NodoUrl)pNodo.getHder());
             }
-            lastCantP=0;
         }
-        return lastCantP;
     }
     
-    /**
-     * metodo privado especial que permite devolver nodos conectados al arbol.
-     * @param pDato recibe un dato generico, que sea igual a los datos 
-     * que se ingresado con anterioridad al arbol.
-     * @return retorna un null si no existe el dato; en caso de que exista
-     * devolvera un nodo que contiene las conexiones y referencias con 
-     * respecto al arbol.
-     */
-    private boolean isLeft(NodoUrl pNodo, int lastCantP){
-        if (_root==pNodo)
-            return false;
-        else
-            return FindAux((NodoUrl)_root.getHizq(),pNodo,lastCantP);
-    }
-    
-    /**
-     * metodo privado recursivo que busca el dato que estamos buscando
-     * @param pNodo recibe inicialmente la raiz.
-     * @param pDato recibe un dato generico, que sea igual a los datos 
-     * que se ingresado con anterioridad al arbol.
-     * @return retorna el nodo que haya sido igual.
-     */
-    private boolean FindAux(NodoUrl pNodo, NodoUrl pNodoToSearch, int lastCantP){
-        if(pNodo==pNodoToSearch)
-            return true;
-        if(true){//pNodo.LengthP()){
-            if((NodoUrl)pNodo.getHder()==null)
-                return false;
-            else
-                return FindAux((NodoUrl)pNodo.getHder(), pNodoToSearch, lastCantP);
-        }
-        if(pNodo.getDato().compareTo(pNodoToSearch.getDato())>0){
-            if((NodoUrl)pNodo.getHizq()==null)
-                return false;
-            else 
-                return FindAux((NodoUrl)pNodo.getHizq(), pNodoToSearch, lastCantP);
-        }
-        return false;
-    }
-    
-    /**
+     /**
      * metodo privado para poder calcular la profundidad de cada nodo
      * @param Hizq hijo izquierdo del nodo
      * @param Hder hijo derecho del nodo
@@ -141,7 +88,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
      * @return retrona un dato tipo int, si se retorna un dato con valor
      * de cero es que se encuentra equilibrado
      */
-    private double FactorEquilibrio(NodoB Hizq, NodoB Hder){
+    private double FactorEquilibrio(NodoUrl Hizq, NodoUrl Hder){
         if(Hizq!=null&&Hder!=null)
             return Hizq.getDepth()-Hder.getDepth();
         else if(Hizq!=null)
@@ -150,6 +97,56 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
             return -Hder.getDepth()-1;
         else
             return 0;
+    }
+    
+    /**
+      * metodo privado para establecer y revisar la altura de los nodos
+      * este mismo realiza las rotaciones.
+      */
+     private void check(){
+         NodoUrl tmp= _root;
+         checkAux(tmp);
+     }
+    
+    /**
+     * metodo recursivo que va poniendo la profundidad, factor de equilibrio
+     * y revisa si se ocupan hacer rotaciones en el arbol.
+     * @param pNodo recibe un dato del tipo NodoB
+     */
+    private void checkAux(NodoUrl pNodo){
+        if(pNodo==null)
+            return;
+        checkAux((NodoUrl)pNodo.getHizq());
+        checkAux((NodoUrl)pNodo.getHder());
+        pNodo.setDepth(Heigth((NodoUrl)pNodo.getHizq(), (NodoUrl)pNodo.getHder()));
+        pNodo.setFE(FactorEquilibrio((NodoUrl)pNodo.getHizq(), (NodoUrl)pNodo.getHder()));
+        //System.out.println("Profundidad: "+pNodo.getDepth()+"; Factor de equilibrio: "+ pNodo.getFE());
+        if(pNodo==_root){
+            if(pNodo.getFE()>=2){
+                if((pNodo.getFE()+pNodo.getHizq().getFE())>pNodo.getFE())
+                    _root=rotacionSDer(pNodo);
+                else
+                    _root=rotacionDDer(pNodo);
+            }
+            else if(pNodo.getFE()<=-2)
+                if((pNodo.getFE()+pNodo.getHder().getFE())<pNodo.getFE())
+                    _root=rotacionSIzq(pNodo);
+                else
+                    _root=rotacionDIzq(pNodo);
+        }
+        else{
+            if(pNodo.getFE()>=2){
+                if((pNodo.getFE()+pNodo.getHizq().getFE())>pNodo.getFE())
+                    rotacionSDer(pNodo);
+                else
+                    rotacionDDer(pNodo);
+            }
+            else if(pNodo.getFE()<=-2)
+                if((pNodo.getFE()+pNodo.getHder().getFE())<pNodo.getFE())
+                    rotacionSIzq(pNodo);
+                else
+                    rotacionDIzq(pNodo);
+        }
     }
     
     /**
@@ -187,70 +184,150 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
             padre.setHder(hizq);
         else if(padre!=null && (NodoUrl)padre.getHizq()==pNodo)
             padre.setHizq(hizq);
-        if (minMAx!=null)
+        if(minMAx!=null)
             minMAx.setPadre(pNodo);
         return hizq;
     }
     
     /**
-     * metodo privado para establecer y revisar la altura de los nodos
-     * este mismo realiza las rotaciones.
+     * metodo para realizar una doble rotacion hacia la derecha.
+     * @param pNodo este dato pertenece a la clase NodoUrl.
+     * @return retorna el nodo que ahora es la cabeza del movimiento.
      */
-    private void check(){
-        NodoUrl tmp= _root;
-        checkAux(tmp);
+    private NodoUrl rotacionDDer(NodoUrl pNodo){
+        NodoUrl padre= (NodoUrl)pNodo.getPadre();
+        NodoUrl hizqG= (NodoUrl)pNodo.getHizq().getHder().getHizq();
+        NodoUrl hderG= (NodoUrl)pNodo.getHizq().getHder().getHder();
+        NodoUrl hizq= (NodoUrl)pNodo.getHizq();
+        NodoUrl toHead= (NodoUrl)pNodo.getHizq().getHder();
+        toHead.setPadre(padre);
+        toHead.setHizq(hizq);
+        toHead.setHder(pNodo);
+        hizq.setPadre(toHead);
+        hizq.setHder(hizqG);
+        pNodo.setPadre(toHead);
+        pNodo.setHizq(hderG);
+        if(padre!=null && padre.getHder()==pNodo)
+            padre.setHder(toHead);
+        else if(padre!=null && padre.getHizq()==pNodo)
+            padre.setHizq(toHead);
+        if(hderG!=null)
+            hderG.setPadre(pNodo);
+        if (hizqG!=null)
+            hizqG.setPadre(hizq);
+        return toHead;
     }
     
     /**
-     * metodo recursivo que va poniendo la profundidad, factor de equilibrio
-     * y revisa si se ocupan hacer rotaciones en el arbol.
-     * @param pNodo recibe un dato del tipo NodoB
+     * metodo para realizar rotaciones hacia la izquierda.
+     * @param pNodo dato que pertenece a la clase NodoUrl.
+     * @return retorna el nodo que ahora es la cabeza del movimiento.
      */
-    private void checkAux(NodoUrl pNodo){
-        if(pNodo==null)
-            return;
-        checkAux((NodoUrl)pNodo.getHizq());
-        checkAux((NodoUrl)pNodo.getHder());
-        pNodo.setDepth(Heigth((NodoUrl)pNodo.getHizq(), (NodoUrl)pNodo.getHder()));
-        pNodo.setFE(FactorEquilibrio((NodoUrl)pNodo.getHizq(), (NodoUrl)pNodo.getHder()));
-        //System.out.println("Profundidad: "+pNodo.getDepth()+"; Factor de equilibrio: "+ pNodo.getFE());
-        if(pNodo==_root){
-            if(pNodo.getFE()>1)
-                _root=rotacionSDer(pNodo);
-            else if(pNodo.getFE()<-1)
-                _root=rotacionSIzq(pNodo);
+    private NodoUrl rotacionDIzq(NodoUrl pNodo){
+        NodoUrl padre= (NodoUrl)pNodo.getPadre();
+        NodoUrl hizqG= (NodoUrl)pNodo.getHder().getHizq().getHizq();
+        NodoUrl hderG= (NodoUrl)pNodo.getHder().getHizq().getHder();
+        NodoUrl hder= (NodoUrl)pNodo.getHizq();
+        NodoUrl toHead= (NodoUrl)pNodo.getHizq().getHder();
+        toHead.setPadre(padre);
+        toHead.setHder(hder);
+        toHead.setHizq(pNodo);
+        hder.setPadre(toHead);
+        hder.setHizq(hderG);
+        pNodo.setPadre(toHead);
+        pNodo.setHder(hizqG);
+        if(padre!=null && padre.getHder()==pNodo)
+            padre.setHder(toHead);
+        else if(padre!=null && padre.getHizq()==pNodo)
+            padre.setHizq(toHead);
+        if(hderG!=null)
+            hderG.setPadre(hder);
+        if (hizqG!=null)
+            hizqG.setPadre(pNodo);
+        return toHead;
+    }
+    
+    /**
+     * metodo para realizar una colocacion forzada en la izquierda por 
+     * si una palabra tiene la misma cantidad de datos que otra.
+     * @param pNodo dato que incialmente el padre de donde va ingresar
+     * @param padre dato de que se va ingresar
+     * ambos datos, tanto como pNodo y padre son datos que pertenecen a la 
+     * clase NodoUrl.
+     */
+    private void overPlaceIzq(NodoUrl pNodo, NodoUrl padre){
+        NodoUrl hijo = (NodoUrl)padre.getHizq();
+        padre.setHizq(pNodo);
+        pNodo.setPadre(padre);
+        pNodo.setHizq(hijo);
+        hijo.setPadre(pNodo);
+    }
+    
+    /**
+     * metodo para realizar una colocacion forzada en la derecha por 
+     * si una palabra tiene la misma cantidad de datos que otra.
+     * @param pNodo dato que incialmente el padre de donde va ingresar
+     * @param padre dato de que se va ingresar
+     * ambos datos, tanto como pNodo y padre son datos que pertenecen a la 
+     * clase NodoUrl.
+     */
+    private void overPlaceDer(NodoUrl pNodo, NodoUrl padre){
+        NodoUrl hijo = (NodoUrl)padre.getHizq();
+        padre.setHder(pNodo);
+        pNodo.setPadre(padre);
+        pNodo.setHder(hijo);
+        hijo.setPadre(pNodo);
+    }
+    
+    /**
+     * agarra el dato que se acaba de ingresar y compara si es necesario 
+     * hacer recolocacion ya que el arbol se desorganiza.
+     * @param pDato dato que pertenece a la clase NodoUrl y se usa para 
+     * representar al que se va a mover.
+     */
+    private void reLocate(NodoUrl pDato){
+        super.delete(pDato.getDato(),_root);
+        insertAux(pDato, _root);
+    }
+    
+    /**
+     * metodo booleano para confirmar si un dato es izquierda en el arbol o no.
+     * @param pDato dato que se va a confirmar y pertenece a la clase NoroUrl
+     * @return retorna un booleano
+     */
+    public boolean isLeft(NodoUrl pDato){
+        if(pDato==_root)
+            return false;
+        else
+            return findAux(pDato, (NodoUrl)_root.getHizq());
+    }
+
+    /**
+     * retorna una booleano confirmando si es izquierdo o no.
+     * @param pDato dato con el que se compara.
+     * @param pNodo dato padre para hacer la comparacion.
+     * @return retorna un booleano.
+     */
+    private boolean findAux(NodoUrl pDato, NodoUrl pNodo){
+        if (pNodo.getDato().compareTo(pDato.getDato())==0){
+            if(pDato.LengthP()>_root.LengthP())
+                return true;
+            else
+                return false;
         }
         else{
-            if(pNodo.getFE()>1)
-                rotacionSDer(pNodo);
-            else if(pNodo.getFE()<-1)
-                rotacionSIzq(pNodo);
+            if(pNodo.getDato().compareTo(pDato.getDato())>0){
+                if((NodoUrl)pNodo.getHizq()==null)
+                    return false;
+                else
+                    return findAux(pDato, (NodoUrl)pNodo.getHizq());
+            }
+            else{
+                if((NodoUrl)pNodo.getHder()==null)
+                    return false;
+                else
+                    return findAux(pDato, (NodoUrl)pNodo.getHder());
+            }
         }
     }
-    
-    
-    private void outSide(NodoUrl pNodo){
-        if(true){}
-    }
-    
-    /**
-     * metodo sobreescrito para imprimir en preorden los nodos de un arbol
-     */
-    @Override
-    public void print(){
-        super.print(_root);
-    }
-    
-     /* pruebas unitarias del arbol AVL
-    public static void main(String[] args) {
-        Arbol_AVL nuevo = new Arbol_AVL();
-        nuevo.insert(10);
-        nuevo.insert(5);
-        nuevo.insert(15);
-        nuevo.insert(13);
-        nuevo.insert(20);
-        nuevo.insert(19);
-        nuevo.insert(22);
-        nuevo.print();
-    }*/
 }
