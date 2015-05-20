@@ -20,16 +20,12 @@ public class NodoUrl <dp extends Comparable<dp>> extends NodoB{
      * contructor que recibe la palabra, el url o direccion en disco del archivo
      * y la cantidad de veces de aparicion de la palabra
      * @param pData dato String que recibe la palabra que se va a ingresar
-     * @param Urlpadre dato String que recibe el Url de donde se encontro,
-     * tambien pueden ser ubicaciones en disco duro de archivos
      * @param cantAp la cantidad total de veces que aparecio la palabra en 
      * ese archivo.
      * */
-    public NodoUrl(String pData, String Urlpadre, int cantAp) {
+    public NodoUrl(String pData, int cantAp) {
         super(pData);
-        this.Urlpadre= new ListaSdoble();
         this.countPpage= new ListaSdoble();
-        this.Urlpadre.enQueue(Urlpadre);
         this.countPpage.enQueue(cantAp);
         indiceCt= this.countPpage.getHead();
     }
@@ -90,37 +86,6 @@ public class NodoUrl <dp extends Comparable<dp>> extends NodoB{
     }
     
     /**
-     * metodo para ingresar un nuevo padre a la keyword.
-     * @param pUrlpadre dato de entra del Url padre
-     * @param pCantAp dato int que recive la cantidad de veces
-     * que aparecio la palabra
-     */
-    public void insertUrlsPadre(String pUrlpadre, int pCantAp){
-        indiceCt.setNext(new Nodo(pCantAp));
-        indiceCt= indiceCt.getNext();
-        this.Urlpadre.enQueue(Urlpadre);
-    }
-    
-    /**
-     * obtiene los padres urls del nodo
-     * @return Urlpadre;
-     */
-    public ListaSdoble getUrlsPadres(){
-        return Urlpadre;
-    }
-    
-    /**
-     * 
-     * @return devuleve la lista de la cantidad de veces que se encontro 
-     * la palabra por url.
-     */
-    public ListaSdoble getCont(){
-        return countPpage;
-    }
-    
-    
-    
-    /**
      * retorna la cantidad de padres que existen en un nodo
      * @return 
      */
@@ -132,19 +97,5 @@ public class NodoUrl <dp extends Comparable<dp>> extends NodoB{
             tmp=tmp.getNext();
         }
         return i;
-    }
-    
-    /**
-     * metodo pra imprimir el ocntenido del nodo, en este caso imprime
-     * los padres del nodo y su cantidad de veces aparecida.
-     */
-    public void printPadre(){
-        Nodo tmp1= Urlpadre.getHead();
-        Nodo tmp2= countPpage.getHead();
-        while(tmp1!=null || tmp2!=null){
-            System.out.println(tmp1.getData()+"..Cantidades de veces Encontrada la palabra: "+tmp2.getData());
-            tmp1= tmp1.getNext();
-            tmp2= tmp2.getNext();
-        }
     }
 }
