@@ -22,10 +22,9 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
         if (_root==null)
             _root=pDato;
         else{
-            NodoUrl ifExist= super.exist(pDato, _root);
-            if (ifExist!=null)
-                if(pDato.LengthP()>_root.LengthP() && isLeft(ifExist, (NodoUrl)_root.getHizq()))
-                    reLocate(ifExist, pDato);
+            NodoUrl ifExist= exist(pDato, _root);
+            if (ifExist!=null && ifExist!=pDato)
+                reLocate(ifExist, pDato);
             else
                 insertAux( pDato, _root);
         }
@@ -192,7 +191,8 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
      * representar al que se va a mover.
      */
     private void reLocate(NodoUrl pDato, NodoUrl newInsert){
-        
+        _root=delete(pDato, _root);
+        insert(newInsert);
     }
     
     private boolean isLeft(NodoUrl pDato, NodoUrl pPadre){
@@ -212,6 +212,11 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
         }
     }
     
+    public void print() {
+        super.print(_root); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**
     public static void main(String[] args) {
         Arbol_AVL Nuevo= new Arbol_AVL();
         NodoUrl nuevo= new NodoUrl("A",3);
@@ -220,13 +225,15 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
         NodoUrl nuevo3= new NodoUrl("C",1);
         NodoUrl nuevo4= new NodoUrl("F",3);
         NodoUrl nuevo5= new NodoUrl("A",9);
+        NodoUrl nuevo6= new NodoUrl("A",9);
+        NodoUrl nuevo6= new NodoUrl("B",9);
         Nuevo.insert(nuevo);
         Nuevo.insert(nuevo1);
         Nuevo.insert(nuevo2);
         Nuevo.insert(nuevo3);
         Nuevo.insert(nuevo4);
-        //Nuevo.print();
-        Nuevo.insert(nuevo4);
-        Nuevo.insert(nuevo5);        
-    }
+        Nuevo.insert(nuevo5);
+        Nuevo.insert(nuevo6);
+        Nuevo.print();
+    }*/
 }
