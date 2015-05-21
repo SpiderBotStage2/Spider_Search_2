@@ -127,27 +127,27 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
             if(pNodo.getFE()>=2){
                 if((pNodo.getFE()+pNodo.getHizq().getFE())>pNodo.getFE())
                     _root=rotacionSDer(pNodo);
-                else{}
-                   // _root=super.rotacionDDer(pNodo);
+                else
+                   _root=rotacionDDer(pNodo);
             }
             else if(pNodo.getFE()<=-2)
                 if((pNodo.getFE()+pNodo.getHder().getFE())<pNodo.getFE())
                     _root=rotacionSIzq(pNodo);
-                else{}
-                    //_root=rotacionDIzq(pNodo);
+                else
+                    _root=rotacionDIzq(pNodo);
         }
         else{
             if(pNodo.getFE()>=2){
                 if((pNodo.getFE()+pNodo.getHizq().getFE())>pNodo.getFE())
                     rotacionSDer(pNodo);
-                else{}
-                    //rotacionDDer(pNodo);
+                else
+                    rotacionDDer(pNodo);
             }
             else if(pNodo.getFE()<=-2)
                 if((pNodo.getFE()+pNodo.getHder().getFE())<pNodo.getFE())
                     rotacionSIzq(pNodo);
-                else{}
-                    //rotacionDIzq(pNodo);
+                else
+                    rotacionDIzq(pNodo);
         }
     }
     
@@ -226,7 +226,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
         Nuevo.insert(nuevo3);
         Nuevo.insert(nuevo4);
         //Nuevo.print();
-        //Nuevo.insert(nuevo4);
-        //Nuevo.insert(nuevo5);        
+        Nuevo.insert(nuevo4);
+        Nuevo.insert(nuevo5);        
     }
 }

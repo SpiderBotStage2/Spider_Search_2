@@ -6,7 +6,9 @@
 package logica;
 
 /**
- *
+ * clase creada para agregarle metodos a los arboles sin tener que sobrecargar
+ * de codigo las clases de arboles, este es usado mayor mente por arboles 
+ * AVL.
  * @author osboxes
  */
 public class MetodosPArbolesSP {
@@ -79,7 +81,7 @@ public class MetodosPArbolesSP {
      * @param pNodo este dato pertenece a la clase NodoUrl.
      * @return retorna el nodo que ahora es la cabeza del movimiento.
      */
-    private NodoUrl rotacionDDer(NodoUrl pNodo){
+    public NodoUrl rotacionDDer(NodoUrl pNodo){
         NodoUrl padre= (NodoUrl)pNodo.getPadre();
         NodoUrl hizqG= (NodoUrl)pNodo.getHizq().getHder().getHizq();
         NodoUrl hderG= (NodoUrl)pNodo.getHizq().getHder().getHder();
@@ -108,7 +110,7 @@ public class MetodosPArbolesSP {
      * @param pNodo dato que pertenece a la clase NodoUrl.
      * @return retorna el nodo que ahora es la cabeza del movimiento.
      */
-    private NodoUrl rotacionDIzq(NodoUrl pNodo){
+    public NodoUrl rotacionDIzq(NodoUrl pNodo){
         NodoUrl padre= (NodoUrl)pNodo.getPadre();
         NodoUrl hizqG= (NodoUrl)pNodo.getHder().getHizq().getHizq();
         NodoUrl hderG= (NodoUrl)pNodo.getHder().getHizq().getHder();
@@ -144,6 +146,19 @@ public class MetodosPArbolesSP {
             return minMax(pNodo.getHizq());
         else 
             return pNodo;
+    }
+    
+    /**
+     * meotodo de borrado para cualquier arbol diferente de un binario
+     * @param dato dato generico
+     * @param pNodo el nodo raiz del arbol
+     * @return retorna el nodo Aux convertido ahora en la raiz
+     */
+    public NodoB delete(NodoUrl dato, NodoUrl pNodo){
+        if(pNodo==null)
+            return null;
+        pNodo=deleteSP(dato, pNodo);
+        return pNodo;
     }
     
     private NodoUrl deleteSP(NodoUrl dato, NodoUrl pNodo){
