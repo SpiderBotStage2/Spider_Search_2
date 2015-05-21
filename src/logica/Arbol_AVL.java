@@ -10,10 +10,10 @@ package logica;
  * @author osboxes
  * @param <dp>
  */
-public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
+public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
     
     private NodoUrl _root;
-    
+          
     /**
      * metodo especial para ingresar datos en una rbol AVL
      * @param pDato dato que se ingres ay pertenece a la clase NodoUrl
@@ -21,10 +21,14 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
     public void insert(NodoUrl pDato){
         if (_root==null)
             _root=pDato;
-        else
-            insertAux( pDato, _root);
-        if(isLeft(pDato))
-            reLocate(pDato);
+        else{
+            NodoUrl ifExist= super.exist(pDato, _root);
+            if (ifExist!=null)
+                if(pDato.LengthP()>_root.LengthP() && isLeft(ifExist, (NodoUrl)_root.getHizq()))
+                    reLocate(ifExist, pDato);
+            else
+                insertAux( pDato, _root);
+        }
         check();
     }
     
@@ -34,32 +38,30 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
      * @param pNodo dato padre para recursionar, pertenece a la clase 
      * NodoUrl.
      */
-    private void insertAux(NodoUrl pDato, NodoUrl pNodo){
-        if (pNodo.LengthP()==pDato.LengthP()){
-            if(pNodo.getDato().compareTo(pDato.getDato())==0)
-                pNodo=pDato;
-            else if(pNodo.getDato().compareTo(pDato.getDato())<0){
-                overPlaceIzq(pDato, pNodo);
+    private void insertAux(NodoUrl pDato, NodoUrl pRaiz){
+        if (pRaiz.LengthP()==pDato.LengthP()){
+            if(pRaiz.getDato().compareTo(pDato.getDato())<0){
+                overPlaceDer(pDato, pRaiz);
             }
             else
-                overPlaceDer(pDato, pNodo);
+                overPlaceIzq(pDato, pRaiz);
         }
         else{
-            if(pNodo.LengthP()<pDato.LengthP()){   
-                if(pNodo.getHizq()==null){
-                    pNodo.setHizq(pDato);
-                    ((NodoUrl)pNodo.getHizq()).setPadre(pNodo);
+            if(pRaiz.LengthP()>pDato.LengthP()){   
+                if(pRaiz.getHizq()==null){
+                    pRaiz.setHizq(pDato);
+                    ((NodoUrl)pRaiz.getHizq()).setPadre(pRaiz);
                 }
                 else
-                    insertAux(pDato, (NodoUrl)pNodo.getHizq());
+                    insertAux(pDato, (NodoUrl)pRaiz.getHizq());
             }
             else{
-                if(pNodo.getHder()==null){
-                    pNodo.setHder(pDato);
-                    ((NodoUrl)pNodo.getHder()).setPadre(pNodo);
+                if(pRaiz.getHder()==null){
+                    pRaiz.setHder(pDato);
+                    ((NodoUrl)pRaiz.getHder()).setPadre(pRaiz);
                 }
                 else
-                    insertAux(pDato,(NodoUrl)pNodo.getHder());
+                    insertAux(pDato,(NodoUrl)pRaiz.getHder());
             }
         }
     }
@@ -126,7 +128,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
                 if((pNodo.getFE()+pNodo.getHizq().getFE())>pNodo.getFE())
                     _root=rotacionSDer(pNodo);
                 else
-                    _root=rotacionDDer(pNodo);
+                    _root=super.rotacionDDer(pNodo);
             }
             else if(pNodo.getFE()<=-2)
                 if((pNodo.getFE()+pNodo.getHder().getFE())<pNodo.getFE())
@@ -150,104 +152,6 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
     }
     
     /**
-     * metodo para realizar rotaciones simples a la Izquierda
-     * @param pNodo recibe un dato del tipo NodoB
-     */
-    private NodoUrl rotacionSIzq(NodoUrl pNodo){
-        NodoUrl padre= (NodoUrl)pNodo.getPadre();
-        NodoUrl hder= (NodoUrl)pNodo.getHder();
-        NodoUrl maxMIn= (NodoUrl)pNodo.getHder().getHizq();
-        hder.setPadre(padre);
-        hder.setHizq(pNodo);
-        pNodo.setHder(maxMIn);
-        if(padre!=null && (NodoUrl)padre.getHder()==pNodo)
-            padre.setHder(hder);
-        else if(padre!=null && (NodoUrl)padre.getHizq()==pNodo)
-            padre.setHizq(hder);
-        if(maxMIn!=null)
-            maxMIn.setPadre(pNodo);
-        return hder;
-    }
-    
-    /**
-     * metodo para realizar rotacion simple a la Derecha
-     * @param pNodo recibe un dato del tipo NodoB
-     */
-    private NodoUrl rotacionSDer(NodoUrl pNodo){
-        NodoUrl padre=(NodoUrl)pNodo.getPadre();
-        NodoUrl hizq= (NodoUrl)pNodo.getHizq();
-        NodoUrl minMAx=(NodoUrl)pNodo.getHizq().getHder();
-        hizq.setHder(pNodo);
-        hizq.setPadre(padre);
-        pNodo.setHizq(minMAx);
-        if(padre!=null && (NodoUrl)padre.getHder()==pNodo)
-            padre.setHder(hizq);
-        else if(padre!=null && (NodoUrl)padre.getHizq()==pNodo)
-            padre.setHizq(hizq);
-        if(minMAx!=null)
-            minMAx.setPadre(pNodo);
-        return hizq;
-    }
-    
-    /**
-     * metodo para realizar una doble rotacion hacia la derecha.
-     * @param pNodo este dato pertenece a la clase NodoUrl.
-     * @return retorna el nodo que ahora es la cabeza del movimiento.
-     */
-    private NodoUrl rotacionDDer(NodoUrl pNodo){
-        NodoUrl padre= (NodoUrl)pNodo.getPadre();
-        NodoUrl hizqG= (NodoUrl)pNodo.getHizq().getHder().getHizq();
-        NodoUrl hderG= (NodoUrl)pNodo.getHizq().getHder().getHder();
-        NodoUrl hizq= (NodoUrl)pNodo.getHizq();
-        NodoUrl toHead= (NodoUrl)pNodo.getHizq().getHder();
-        toHead.setPadre(padre);
-        toHead.setHizq(hizq);
-        toHead.setHder(pNodo);
-        hizq.setPadre(toHead);
-        hizq.setHder(hizqG);
-        pNodo.setPadre(toHead);
-        pNodo.setHizq(hderG);
-        if(padre!=null && padre.getHder()==pNodo)
-            padre.setHder(toHead);
-        else if(padre!=null && padre.getHizq()==pNodo)
-            padre.setHizq(toHead);
-        if(hderG!=null)
-            hderG.setPadre(pNodo);
-        if (hizqG!=null)
-            hizqG.setPadre(hizq);
-        return toHead;
-    }
-    
-    /**
-     * metodo para realizar rotaciones hacia la izquierda.
-     * @param pNodo dato que pertenece a la clase NodoUrl.
-     * @return retorna el nodo que ahora es la cabeza del movimiento.
-     */
-    private NodoUrl rotacionDIzq(NodoUrl pNodo){
-        NodoUrl padre= (NodoUrl)pNodo.getPadre();
-        NodoUrl hizqG= (NodoUrl)pNodo.getHder().getHizq().getHizq();
-        NodoUrl hderG= (NodoUrl)pNodo.getHder().getHizq().getHder();
-        NodoUrl hder= (NodoUrl)pNodo.getHizq();
-        NodoUrl toHead= (NodoUrl)pNodo.getHizq().getHder();
-        toHead.setPadre(padre);
-        toHead.setHder(hder);
-        toHead.setHizq(pNodo);
-        hder.setPadre(toHead);
-        hder.setHizq(hderG);
-        pNodo.setPadre(toHead);
-        pNodo.setHder(hizqG);
-        if(padre!=null && padre.getHder()==pNodo)
-            padre.setHder(toHead);
-        else if(padre!=null && padre.getHizq()==pNodo)
-            padre.setHizq(toHead);
-        if(hderG!=null)
-            hderG.setPadre(hder);
-        if (hizqG!=null)
-            hizqG.setPadre(pNodo);
-        return toHead;
-    }
-    
-    /**
      * metodo para realizar una colocacion forzada en la izquierda por 
      * si una palabra tiene la misma cantidad de datos que otra.
      * @param pNodo dato que incialmente el padre de donde va ingresar
@@ -260,7 +164,8 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         padre.setHizq(pNodo);
         pNodo.setPadre(padre);
         pNodo.setHizq(hijo);
-        hijo.setPadre(pNodo);
+        if(hijo!=null)
+            hijo.setPadre(pNodo);
     }
     
     /**
@@ -272,11 +177,12 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
      * clase NodoUrl.
      */
     private void overPlaceDer(NodoUrl pNodo, NodoUrl padre){
-        NodoUrl hijo = (NodoUrl)padre.getHizq();
+        NodoUrl hijo = (NodoUrl)padre.getHder();
         padre.setHder(pNodo);
         pNodo.setPadre(padre);
         pNodo.setHder(hijo);
-        hijo.setPadre(pNodo);
+        if(hijo!=null)
+            hijo.setPadre(pNodo);
     }
     
     /**
@@ -285,49 +191,42 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
      * @param pDato dato que pertenece a la clase NodoUrl y se usa para 
      * representar al que se va a mover.
      */
-    private void reLocate(NodoUrl pDato){
-        super.delete(pDato.getDato(),_root);
-        insertAux(pDato, _root);
+    private void reLocate(NodoUrl pDato, NodoUrl newInsert){
+        
     }
     
-    /**
-     * metodo booleano para confirmar si un dato es izquierda en el arbol o no.
-     * @param pDato dato que se va a confirmar y pertenece a la clase NoroUrl
-     * @return retorna un booleano
-     */
-    public boolean isLeft(NodoUrl pDato){
-        if(pDato==_root)
-            return false;
-        else
-            return findAux(pDato, (NodoUrl)_root.getHizq());
-    }
-
-    /**
-     * retorna una booleano confirmando si es izquierdo o no.
-     * @param pDato dato con el que se compara.
-     * @param pNodo dato padre para hacer la comparacion.
-     * @return retorna un booleano.
-     */
-    private boolean findAux(NodoUrl pDato, NodoUrl pNodo){
-        if (pNodo.getDato().compareTo(pDato.getDato())==0){
-            if(pDato.LengthP()>_root.LengthP())
-                return true;
+    private boolean isLeft(NodoUrl pDato, NodoUrl pPadre){
+        if(pDato==pPadre)
+            return true;
+        else if (pDato.LengthP()<pPadre.LengthP()){
+            if(pPadre.getHizq()!=null)
+                return isLeft(pDato, (NodoUrl)pPadre.getHizq());
             else
                 return false;
         }
         else{
-            if(pNodo.getDato().compareTo(pDato.getDato())>0){
-                if((NodoUrl)pNodo.getHizq()==null)
-                    return false;
-                else
-                    return findAux(pDato, (NodoUrl)pNodo.getHizq());
-            }
-            else{
-                if((NodoUrl)pNodo.getHder()==null)
-                    return false;
-                else
-                    return findAux(pDato, (NodoUrl)pNodo.getHder());
-            }
+            if(pPadre.getHder()!=null)
+                return isLeft(pDato, (NodoUrl)pPadre.getHder());
+            else
+                return false;
         }
+    }
+    
+    public static void main(String[] args) {
+        Arbol_AVL Nuevo= new Arbol_AVL();
+        NodoUrl nuevo= new NodoUrl("A",3);
+        NodoUrl nuevo1= new NodoUrl("B",8);
+        NodoUrl nuevo2= new NodoUrl("D",7);
+        NodoUrl nuevo3= new NodoUrl("C",1);
+        NodoUrl nuevo4= new NodoUrl("F",3);
+        NodoUrl nuevo5= new NodoUrl("A",9);
+        Nuevo.insert(nuevo);
+        Nuevo.insert(nuevo1);
+        Nuevo.insert(nuevo2);
+        Nuevo.insert(nuevo3);
+        Nuevo.insert(nuevo4);
+        Nuevo.print();
+        //Nuevo.insert(nuevo4);
+        //Nuevo.insert(nuevo5);        
     }
 }

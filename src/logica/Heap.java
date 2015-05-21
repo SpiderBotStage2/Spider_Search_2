@@ -70,14 +70,4 @@ public class Heap {
         System.out.println(_arreglo[pIndice]);
         printAux((pIndice*2)+2);
     }
-    
-    public static void main(String[] args) {
-        Heap nuevo = new Heap();
-        nuevo.insert("hola");
-        nuevo.insert("mundo");
-        nuevo.insert("como");
-        nuevo.insert("estan");
-        nuevo.insert("putabida");
-        nuevo.print();
-    }
 }

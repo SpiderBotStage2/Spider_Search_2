@@ -43,6 +43,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         }
         return pNodo;
     }
+    
     /**
      * metodo recursivo para ir ingresando los nodos en el arbol
      * @param tmp nodo de arbol que contiene el padre de adonde se va a ingresar
@@ -195,6 +196,8 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         }
     }
     
+    
+    
     /**
      * metodo para realizar un impresion en order del arbol en orden 
      */
@@ -222,18 +225,4 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         System.out.println(tmp.getDato());
         printIOD(tmp.getHder());
     }
-    /**
-     * casos de prueba
-    public static void main(String[] args) {
-        Arbol_binario nuevo = new Arbol_binario();
-        nuevo.insert(5);
-        nuevo.insert(7);
-        nuevo.insert(4);
-        nuevo.insert(8);
-        nuevo.insert(6);
-        nuevo.insert(2);
-        System.out.println(nuevo.find(6));
-        nuevo.delete(6);
-        nuevo.print();
-    }*/
 }
