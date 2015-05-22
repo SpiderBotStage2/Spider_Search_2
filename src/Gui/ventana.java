@@ -6,8 +6,8 @@
 //cambios es informacion minimos
 package Gui;
 
-import logica.ListaSdoble;
-import logica.Nodo;
+import Listas.ListaSdoble;
+import Listas.Nodo;
 
 /**
  *

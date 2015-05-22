@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Arboles;
 
-import static spidersearchengine2.Constantes.crecimientoArreglo;
+import static logica.Constantes.crecimientoArreglo;
 
 /**
  * clase creada para agregarle metodos a los arboles sin tener que sobrecargar
@@ -29,13 +29,13 @@ public class MetodosPArbolesSP {
             return existAux(_root, pNodo);
     }
     
-    private void growArray(int pDepthSize, int pMaxSize, String[] pArreglo){
-        pDepthSize++;
-        double newMAxsize= (Math.pow(crecimientoArreglo,pDepthSize))+pMaxSize;
+    public String[] growArray( int pMaxSize, String[] pArreglo){
+        double newMAxsize= (crecimientoArreglo)+pMaxSize;
         String[] newArreglo= new String[(int)newMAxsize];
         System.arraycopy(pArreglo, 0, newArreglo, 0, pMaxSize);
         pMaxSize=(int)newMAxsize;
         pArreglo=newArreglo;
+        return pArreglo;
     }
     
     public NodoUrl existAux(NodoUrl pNodo, NodoUrl pDato){

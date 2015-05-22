@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Listas;
+
+import Listas.ListaSdoble;
 
 /**
  * clase creada para la base de datos para los urls que se van ingresando 

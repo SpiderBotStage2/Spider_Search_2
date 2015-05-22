@@ -4,7 +4,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Listas;
+
+import Listas.Nodo;
 
 /**
  * esta clase nos sirve para ir haciendo los nodos que estaran 

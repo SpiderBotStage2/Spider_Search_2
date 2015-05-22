@@ -1,5 +1,5 @@
 
-package spidersearchengine2;
+package logica;
 
 import java.net.*;
 

@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Arboles;
+
+import Arboles.Arbol_binario;
 
 /**
  * clase para crear arboles splay
