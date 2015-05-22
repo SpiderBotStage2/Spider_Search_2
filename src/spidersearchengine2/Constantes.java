@@ -36,4 +36,6 @@ public interface Constantes {
     //
     
     public static final int crecimientoArreglo = 2;
+    
+    //se deben eliminar varias constantes
 }
