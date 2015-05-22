@@ -1,7 +1,9 @@
 package spidersearchengine2;
 
 import java.io.File;
+import java.io.IOException;
 import org.apache.tika.Tika;
+import org.apache.tika.exception.TikaException;
 
 public class LectorPDF {
     public String ContenidoDelArchivo = null;
@@ -18,8 +20,7 @@ public class LectorPDF {
           ContenidoDelArchivo = ContenidoDelArchivo.replaceAll("\\s+", "");
           
         }
-        catch (Exception e) {
-          e.printStackTrace();
+        catch (IOException | TikaException e) {
         }
 
     } 
