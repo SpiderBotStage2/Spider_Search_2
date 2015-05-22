@@ -5,6 +5,8 @@
  */
 package logica;
 
+import static spidersearchengine2.Constantes.crecimientoArreglo;
+
 /**
  * clase creada para agregarle metodos a los arboles sin tener que sobrecargar
  * de codigo las clases de arboles, este es usado mayor mente por arboles 
@@ -27,15 +29,16 @@ public class MetodosPArbolesSP {
             return existAux(_root, pNodo);
     }
     
-    /**
-     * metodo recusivo que busca en el arbol hasta encontrar el nodo y retornar
-     * un nodo valido o un nulo de no encontrar el nodo. 
-     * @param pNodo dato de la clase NodoUrl, se le ingresa el nodo que buscamos.
-     * @param pDato dato de la clase NodoUrl, se le ingresa el nodo con que 
-     * compara.
-     * @return retorna un dato nulo o un nodo.
-     */
-    private NodoUrl existAux(NodoUrl pNodo, NodoUrl pDato){
+    private void growArray(int pDepthSize, int pMaxSize, String[] pArreglo){
+        pDepthSize++;
+        double newMAxsize= (Math.pow(crecimientoArreglo,pDepthSize))+pMaxSize;
+        String[] newArreglo= new String[(int)newMAxsize];
+        System.arraycopy(pArreglo, 0, newArreglo, 0, pMaxSize);
+        pMaxSize=(int)newMAxsize;
+        pArreglo=newArreglo;
+    }
+    
+    public NodoUrl existAux(NodoUrl pNodo, NodoUrl pDato){
         if (pNodo==null)
             return null;
         NodoUrl hizq= existAux((NodoUrl)pNodo.getHizq(), pDato);
