@@ -85,6 +85,6 @@ public class ReadUrls {
      * @return 
      */
     /*public ListaUrls getUrls(){
-        return this.Urls;
+        return this.Urls; hay q cambiarlo
     }*/
 }
