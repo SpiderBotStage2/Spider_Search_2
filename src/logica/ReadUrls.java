@@ -51,7 +51,8 @@ public class ReadUrls {
                 if(nodoL.getNodeType()==Node.ELEMENT_NODE){
                     Element elm= (Element)nodoL;
                     for(int i=0; i<elm.getElementsByTagName("url").getLength();i++){
-                        Urls.enQueue(elm.getElementsByTagName("url").item(i).getTextContent(),0);
+                        //hay q arreglar esta linea
+                        //Urls.enQueue(elm.getElementsByTagName("url").item(i).getTextContent(),0);
                     }
                 }
             }
@@ -83,7 +84,7 @@ public class ReadUrls {
      * retorna la lista de los urls targets en el xml
      * @return 
      */
-    public ListaUrls getUrls(){
+    /*public ListaUrls getUrls(){
         return this.Urls;
-    }
+    }*/
 }
