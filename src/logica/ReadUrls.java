@@ -22,6 +22,7 @@ public class ReadUrls {
     private Document docu;
     private String[] Urls;
     private ListaSdoble SpAtri;
+    private int tail;
     
     /**
      * contructor de la clase
@@ -29,7 +30,7 @@ public class ReadUrls {
      * que se van a estar urilizando
      */
     public ReadUrls(){
-        Urls= new String[14];//tamaño del arreglo
+        Urls = new String[2];//tamaño del arreglo
         SpAtri= new ListaSdoble();
     }
     /**
@@ -51,8 +52,9 @@ public class ReadUrls {
                 if(nodoL.getNodeType()==Node.ELEMENT_NODE){
                     Element elm= (Element)nodoL;
                     for(int i=0; i<elm.getElementsByTagName("url").getLength();i++){
-                        //hay q arreglar esta linea
-                        //Urls.enQueue(elm.getElementsByTagName("url").item(i).getTextContent(),0);
+                        Urls[i]=elm.getElementsByTagName("url").item(0).getTextContent();
+                        tail++;
+                        
                     }
                 }
             }
