@@ -196,8 +196,6 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         }
     }
     
-    
-    
     /**
      * metodo para realizar un impresion en order del arbol en orden 
      */
@@ -214,6 +212,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         NodoB tmp=pNodo;
         printIOD(tmp);
     }
+    
     /**
      * metodo recursivo que va imprimiendo en orden el contenido del arbol
      * @param tmp nodo padre

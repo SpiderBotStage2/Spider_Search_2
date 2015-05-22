@@ -195,45 +195,11 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
         insert(newInsert);
     }
     
-    private boolean isLeft(NodoUrl pDato, NodoUrl pPadre){
-        if(pDato==pPadre)
-            return true;
-        else if (pDato.LengthP()<pPadre.LengthP()){
-            if(pPadre.getHizq()!=null)
-                return isLeft(pDato, (NodoUrl)pPadre.getHizq());
-            else
-                return false;
-        }
-        else{
-            if(pPadre.getHder()!=null)
-                return isLeft(pDato, (NodoUrl)pPadre.getHder());
-            else
-                return false;
-        }
-    }
-    
+    /**
+     * metodo sobre escrito del padre para imprimir todos los nodos del arbol en
+     * orden
+     */
     public void print() {
         super.print(_root); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    /**
-    public static void main(String[] args) {
-        Arbol_AVL Nuevo= new Arbol_AVL();
-        NodoUrl nuevo= new NodoUrl("A",3);
-        NodoUrl nuevo1= new NodoUrl("B",8);
-        NodoUrl nuevo2= new NodoUrl("D",7);
-        NodoUrl nuevo3= new NodoUrl("C",1);
-        NodoUrl nuevo4= new NodoUrl("F",3);
-        NodoUrl nuevo5= new NodoUrl("A",9);
-        NodoUrl nuevo6= new NodoUrl("A",9);
-        NodoUrl nuevo6= new NodoUrl("B",9);
-        Nuevo.insert(nuevo);
-        Nuevo.insert(nuevo1);
-        Nuevo.insert(nuevo2);
-        Nuevo.insert(nuevo3);
-        Nuevo.insert(nuevo4);
-        Nuevo.insert(nuevo5);
-        Nuevo.insert(nuevo6);
-        Nuevo.print();
-    }*/
 }

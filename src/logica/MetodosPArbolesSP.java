@@ -13,6 +13,13 @@ package logica;
  */
 public class MetodosPArbolesSP {
     
+    /**
+     * metodo para revisar si el nodo ya existe en el arbol
+     * @param pNodo dato de la clase NodoUrl, recibe el nodo que se busca.
+     * @param _root dato de la clase NodoUrl, esta va a ser la raiz.
+     * @return dato de la clase NodoUrl y retorna un nulo si no existe y un nodo
+     * valido, si existe el nodo.
+     */
     public NodoUrl exist(NodoUrl pNodo, NodoUrl _root){
         if (pNodo.getDato().compareTo(_root.getDato())==0)
             return _root;
@@ -20,7 +27,15 @@ public class MetodosPArbolesSP {
             return existAux(_root, pNodo);
     }
     
-    public NodoUrl existAux(NodoUrl pNodo, NodoUrl pDato){
+    /**
+     * metodo recusivo que busca en el arbol hasta encontrar el nodo y retornar
+     * un nodo valido o un nulo de no encontrar el nodo. 
+     * @param pNodo dato de la clase NodoUrl, se le ingresa el nodo que buscamos.
+     * @param pDato dato de la clase NodoUrl, se le ingresa el nodo con que 
+     * compara.
+     * @return retorna un dato nulo o un nodo.
+     */
+    private NodoUrl existAux(NodoUrl pNodo, NodoUrl pDato){
         if (pNodo==null)
             return null;
         NodoUrl hizq= existAux((NodoUrl)pNodo.getHizq(), pDato);
@@ -160,6 +175,14 @@ public class MetodosPArbolesSP {
         return deleteSP(dato, pNodo);
     }
     
+    /**
+     * metodo especial, recursivo, que se utiliza para eliminar un nodo en el 
+     * arbol AVL.
+     * @param dato dato de la clase NodoUrl, se le ingresa el nodo a eliminar.
+     * @param pNodo dato de la clase NodoUrl, se ingresa el nodo acomparacion.
+     * @return retorna la nueva raiz del arbol, por si acaso se cambia o 
+     * elimina la raiz.
+     */
     private NodoUrl deleteSP(NodoUrl dato, NodoUrl pNodo){
         if(pNodo.getDato().equals(dato.getDato())){
             if((NodoUrl)pNodo.getHizq()==null)
@@ -202,6 +225,7 @@ public class MetodosPArbolesSP {
         NodoB tmp=pNodo;
         printIOD(tmp);
     }
+    
     /**
      * metodo recursivo que va imprimiendo en orden el contenido del arbol
      * @param tmp nodo padre
