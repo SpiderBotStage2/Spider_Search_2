@@ -39,7 +39,7 @@ public class MetodosPArbolesSP {
             return hizq;
         if(pNodo.getDato().compareTo(pDato.getDato())==0)
             return pNodo;
-        NodoUrl hder=existAux((NodoUrl)pNodo.getHizq(), pDato);
+        NodoUrl hder=existAux((NodoUrl)pNodo.getHder(), pDato);
         if (hder!=null)
             return hder;
         else return null;
@@ -165,11 +165,10 @@ public class MetodosPArbolesSP {
      * @param pNodo el nodo raiz del arbol
      * @return retorna el nodo Aux convertido ahora en la raiz
      */
-    public NodoB delete(NodoUrl dato, NodoUrl pNodo){
+    public NodoUrl delete(NodoUrl dato, NodoUrl pNodo){
         if(pNodo==null)
             return null;
-        pNodo=deleteSP(dato, pNodo);
-        return pNodo;
+        return deleteSP(dato, pNodo);
     }
     
     private NodoUrl deleteSP(NodoUrl dato, NodoUrl pNodo){
@@ -204,5 +203,25 @@ public class MetodosPArbolesSP {
             pNodo.setHder(deleteSP(dato, (NodoUrl)pNodo.getHder()));
             return pNodo;
         }
+    }
+    
+    /**
+     * metodo para arboles diferentes del binario
+     * @param pNodo nodo raiz del arbol
+     */
+    public void print(NodoB pNodo){
+        NodoB tmp=pNodo;
+        printIOD(tmp);
+    }
+    /**
+     * metodo recursivo que va imprimiendo en orden el contenido del arbol
+     * @param tmp nodo padre
+     */
+    private void printIOD(NodoB tmp){
+        if(tmp==null)
+            return;
+        printIOD(tmp.getHizq());
+        System.out.println(tmp.getDato());
+        printIOD(tmp.getHder());
     }
 }
