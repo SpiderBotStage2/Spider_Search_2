@@ -5,7 +5,7 @@
  */
 package spidersearchengine2;
 
-import spidersearchengine2.GUI.Ventana;
+import Gui.ventana;
 
 /**
  *
@@ -17,7 +17,7 @@ public class SpiderSearchEngine2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Ventana ventanaNueva = new Ventana();
+        ventana ventanaNueva = new ventana();
         
         // TODO code application logic here
     }

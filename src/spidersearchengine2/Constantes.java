@@ -33,4 +33,7 @@ public interface Constantes {
     //ruta de archivos de imagenes
     public static final String rutaImagenFondo = "fondo.jpg";
     public static final String rutaImagenIconoVentana = "spider.png";
+    //
+    
+    public static final int crecimientoArreglo = 2;
 }

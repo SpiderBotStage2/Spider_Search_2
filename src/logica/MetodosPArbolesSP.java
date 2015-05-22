@@ -5,6 +5,8 @@
  */
 package logica;
 
+import static spidersearchengine2.Constantes.crecimientoArreglo;
+
 /**
  * clase creada para agregarle metodos a los arboles sin tener que sobrecargar
  * de codigo las clases de arboles, este es usado mayor mente por arboles 
@@ -18,6 +20,15 @@ public class MetodosPArbolesSP {
             return _root;
         else
             return existAux(_root, pNodo);
+    }
+    
+    private void growArray(int pDepthSize, int pMaxSize, String[] pArreglo){
+        pDepthSize++;
+        double newMAxsize= (Math.pow(crecimientoArreglo,pDepthSize))+pMaxSize;
+        String[] newArreglo= new String[(int)newMAxsize];
+        System.arraycopy(pArreglo, 0, newArreglo, 0, pMaxSize);
+        pMaxSize=(int)newMAxsize;
+        pArreglo=newArreglo;
     }
     
     public NodoUrl existAux(NodoUrl pNodo, NodoUrl pDato){
