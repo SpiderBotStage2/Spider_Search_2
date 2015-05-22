@@ -29,7 +29,7 @@ public class ReadUrls {
      * que se van a estar urilizando
      */
     public ReadUrls(){
-        Urls= new String[];//falta ingresarle el tamaño del arreglo
+        Urls= new String[14];//tamaño del arreglo
         SpAtri= new ListaSdoble();
     }
     /**
