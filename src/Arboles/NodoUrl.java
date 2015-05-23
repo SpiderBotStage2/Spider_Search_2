@@ -5,6 +5,7 @@
  */
 package Arboles;
 
+import Listas.ListaUrls;
 /**
  *
  * @author osboxes
@@ -12,6 +13,7 @@ package Arboles;
 public class NodoUrl  extends NodoB{
     
     private int countPpage;
+    private ListaUrls listaUrlsPadres;
     
     /**
      * contructor que recibe la palabra, el url o direccion en disco del archivo
@@ -23,6 +25,7 @@ public class NodoUrl  extends NodoB{
     public NodoUrl(String pData, int cantAp) {
         super(pData);
         this.countPpage=cantAp;
+        this.listaUrlsPadres=new ListaUrls();
     }
 
     @Override
@@ -55,6 +58,10 @@ public class NodoUrl  extends NodoB{
         return super.getDepth(); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void SumCont(int cant){
+        this.countPpage+=cant;
+    }
+    
     @Override
     public void setPadre(NodoB padre) {
         super.setPadre(padre); //To change body of generated methods, choose Tools | Templates.
@@ -80,6 +87,13 @@ public class NodoUrl  extends NodoB{
         super.setDepth(depth); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void setListaPadresUrls(ListaUrls lista){
+        this.listaUrlsPadres=lista;
+    }
+    
+    public ListaUrls getListaPadresUrls(){
+        return this.listaUrlsPadres;
+    }
     /**
      * retorna la cantidad de apariciones de la palabra contenida en el nodo
      * @return 

@@ -5,8 +5,6 @@
  */
 package Listas;
 
-import Listas.ListaSdoble;
-
 /**
  * clase creada para la base de datos para los urls que se van ingresando 
  * para ser procesados por los threads hijos del SpiderBot

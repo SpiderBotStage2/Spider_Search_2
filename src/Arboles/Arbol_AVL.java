@@ -150,6 +150,14 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
         }
     }
     
+    @Override
+    public void delete(Comparable dato) {
+        super.delete(dato, _root);
+    }
+    
+    public NodoUrl exist(NodoUrl pDato) {
+        return super.exist(pDato, _root); //To change body of generated methods, choose Tools | Templates.
+    }
     /**
      * metodo para realizar una colocacion forzada en la izquierda por 
      * si una palabra tiene la misma cantidad de datos que otra.
@@ -199,6 +207,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
      * metodo sobre escrito del padre para imprimir todos los nodos del arbol en
      * orden
      */
+    @Override
     public void print() {
         super.print(_root); //To change body of generated methods, choose Tools | Templates.
     }

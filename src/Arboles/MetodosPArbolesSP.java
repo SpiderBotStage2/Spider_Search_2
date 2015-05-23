@@ -13,7 +13,20 @@ import static logica.Constantes.crecimientoArreglo;
  * AVL.
  * @author osboxes
  */
-public class MetodosPArbolesSP {
+public class MetodosPArbolesSP extends Arbol_binario{
+    
+    
+    /**
+     * metodo sobre escrito para ecnontrar un nodo en cualquier arbol que 
+     * implemente los metodos de esta clase.
+     * @param dato dato tipo generico, dato el cual queremos comparar.
+     * @param pNodo dato de la clase NodoUrl o NodoB, inicialmente es la raiz.
+     * @return retorna un boolean por si es cierto o no que existe el dato que 
+     * buscamos
+     */
+    public boolean find(Comparable dato, NodoUrl pNodo) {
+        return super.find(dato, pNodo); //To change body of generated methods, choose Tools | Templates.
+    }
     
     /**
      * metodo para revisar si el nodo ya existe en el arbol
@@ -29,16 +42,15 @@ public class MetodosPArbolesSP {
             return existAux(_root, pNodo);
     }
     
-    public String[] growArray( int pMaxSize, String[] pArreglo){
-        double newMAxsize= (crecimientoArreglo)+pMaxSize;
-        String[] newArreglo= new String[(int)newMAxsize];
-        System.arraycopy(pArreglo, 0, newArreglo, 0, pMaxSize);
-        pMaxSize=(int)newMAxsize;
-        pArreglo=newArreglo;
-        return pArreglo;
-    }
-    
-    public NodoUrl existAux(NodoUrl pNodo, NodoUrl pDato){
+    /**
+     * metodo para revisar si existe un nodo en el arbol, la manera implementada
+     * es utilizando recursividad y realizando un recorrido en orden.
+     * @param pNodo Dato de la clase NodoUrl, el nodo con que compara.
+     * @param pDato Dato de la clase NodoUrl, el nodo al que se le compara.
+     * @return retorna un null si no existe, si existe se retorna un dato no 
+     * nulo.
+     */
+    private NodoUrl existAux(NodoUrl pNodo, NodoUrl pDato){
         if (pNodo==null)
             return null;
         NodoUrl hizq= existAux((NodoUrl)pNodo.getHizq(), pDato);
@@ -52,9 +64,19 @@ public class MetodosPArbolesSP {
         else return null;
     }
     
+    public String[] growArray( int pMaxSize, String[] pArreglo){
+        double newMAxsize= (crecimientoArreglo)+pMaxSize;
+        String[] newArreglo= new String[(int)newMAxsize];
+        System.arraycopy(pArreglo, 0, newArreglo, 0, pMaxSize);
+        pMaxSize=(int)newMAxsize;
+        pArreglo=newArreglo;
+        return pArreglo;
+    }
+    
      /**
      * metodo para realizar rotaciones simples a la Izquierda
      * @param pNodo recibe un dato del tipo NodoB
+     * @return retorna el nodo que ahora sera la cabeza de las rotacion.
      */
     public NodoUrl rotacionSIzq(NodoUrl pNodo){
         NodoUrl padre= (NodoUrl)pNodo.getPadre();
@@ -76,6 +98,7 @@ public class MetodosPArbolesSP {
     /**
      * metodo para realizar rotacion simple a la Derecha
      * @param pNodo recibe un dato del tipo NodoB
+     * @return retorna el nodo que ahora sera la cabeza luego de la rotacion
      */
     public NodoUrl rotacionSDer(NodoUrl pNodo){
         NodoUrl padre=(NodoUrl)pNodo.getPadre();

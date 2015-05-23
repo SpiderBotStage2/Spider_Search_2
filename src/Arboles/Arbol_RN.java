@@ -5,12 +5,13 @@
  */
 package Arboles;
 
+import logica.Constantes;
 /**
  * clase para crear arboles rojo y negro
  * @author osboxes
  * @param <dp>
  */
-public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_splay{
+public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario implements Constantes{
     
     private NodoB _root;
 
@@ -51,7 +52,7 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_splay{
     
     private void checkAux(NodoB pNodo, NodoB pPadre){
         if (pPadre==null){
-            if(pNodo.getColor()==0)
+            if(pNodo.getColor()==Rojo)
                 changeColor(pNodo);
             _root=pNodo;
             return;
@@ -64,57 +65,57 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_splay{
             NodoB tio;
             if(abuelo.getHizq()==pPadre){
                 tio=abuelo.getHder();
-                if (pPadre.getColor()==1)
+                if (pPadre.getColor()==Negro)
                     return;
                 else if(tio==null){
                     if(pNodo==pPadre.getHizq()){
-                        rotacionSDer(abuelo);
                         changeColor(pPadre);changeColor(abuelo);
+                        abuelo=rotacionSDer(abuelo);
                         checkAux(abuelo, abuelo.getPadre());
                         return;
                     }else{
-                        rotacionDDer(abuelo);
                         changeColor(pNodo);changeColor(abuelo);
+                        abuelo=rotacionDDer(abuelo);
                         checkAux(abuelo, abuelo.getPadre());
                         return;
                     }
                 }
-                else if(tio.getColor()==0){
+                else if(tio.getColor()==Rojo){
                     changeColor(pPadre);changeColor(tio);changeColor(abuelo);
                     checkAux(abuelo, abuelo.getPadre());
                     return;
                 }
-                else if (tio.getColor()==1){
-                    rotacionSDer(abuelo);
+                else if (tio.getColor()==Negro){
                     changeColor(abuelo);changeColor(pPadre);
+                    abuelo=rotacionSDer(abuelo);
                     checkAux(pPadre, pPadre.getPadre());
                     return;
                 }
             }else{
                 tio=abuelo.getHizq();
-                if (pPadre.getColor()==1)
+                if (pPadre.getColor()==Negro)
                     return;
                 else if(tio==null){
                     if(pNodo==pPadre.getHder()){
-                        rotacionSIzq(abuelo);
                         changeColor(pPadre);changeColor(abuelo);
+                        abuelo=rotacionSIzq(abuelo);
                         checkAux(abuelo, abuelo.getPadre());
                         return;
                     }else{
-                        rotacionDIzq(abuelo);
                         changeColor(pNodo);changeColor(abuelo);
+                        abuelo=rotacionDIzq(abuelo);
                         checkAux(abuelo, abuelo.getPadre());
                         return;
                     }
                 }
-                else if(tio.getColor()==0){
+                else if(tio.getColor()==Rojo){
                     changeColor(pPadre);changeColor(tio);changeColor(abuelo);
                     checkAux(abuelo, abuelo.getPadre());
                     return;
                 }
-                else if (tio.getColor()==1){
-                    rotacionSIzq(abuelo);
+                else if (tio.getColor()==Negro){
                     changeColor(abuelo);changeColor(pPadre);
+                    abuelo=rotacionSIzq(abuelo);
                     checkAux(pPadre, pPadre.getPadre());
                     return;
                 }
@@ -225,5 +226,23 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_splay{
             pNodo.setColor(0);
     }
     
+    @Override
+    public void print() {
+        super.print(_root); //To change body of generated methods, choose Tools | Templates.
+    }
     
+    public static void main(String[] args) {
+        Arbol_RN Nuevo = new Arbol_RN();
+        NodoB nuevo= new NodoB(6);
+        NodoB nuevo1= new NodoB(7);
+        NodoB nuevo2= new NodoB(8);
+        NodoB nuevo3= new NodoB(9);
+        NodoB nuevo4= new NodoB(10);
+        Nuevo.insert(nuevo);
+        Nuevo.insert(nuevo1);
+        Nuevo.insert(nuevo2);
+        Nuevo.insert(nuevo3);
+        Nuevo.insert(nuevo4);
+        Nuevo.print();
+    }   
 }

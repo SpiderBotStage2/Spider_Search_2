@@ -5,7 +5,6 @@
  */
 package Arboles;
 
-import Arboles.Arbol_binario;
 
 /**
  * clase para crear arboles splay
