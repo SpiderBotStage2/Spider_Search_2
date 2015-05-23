@@ -153,6 +153,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
     @Override
     public void delete(Comparable dato) {
         super.delete(dato, _root);
+        check();
     }
     
     public NodoUrl exist(NodoUrl pDato) {
