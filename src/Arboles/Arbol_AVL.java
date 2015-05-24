@@ -150,14 +150,15 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
         }
     }
     
-    @Override
-    public void delete(Comparable dato) {
+    public void delete(String dato) {
+        exist(dato);
         super.delete(dato, _root);
         check();
     }
     
-    public NodoUrl exist(NodoUrl pDato) {
-        return super.exist(pDato, _root); //To change body of generated methods, choose Tools | Templates.
+    public NodoUrl exist(String pDato) {
+        NodoUrl pNodo= new NodoUrl(pDato, 1);
+        return super.exist(pNodo, _root); //To change body of generated methods, choose Tools | Templates.
     }
     /**
      * metodo para realizar una colocacion forzada en la izquierda por 

@@ -5,6 +5,8 @@
  */
 package Listas;
 
+import Arboles.NodoPadresUrls;
+
 /**
  *
  * @author osboxes

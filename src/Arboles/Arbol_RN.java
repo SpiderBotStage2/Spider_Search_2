@@ -6,16 +6,17 @@
 package Arboles;
 
 import logica.Constantes;
+
 /**
  * clase para crear arboles rojo y negro
  * @author osboxes
  * @param <dp>
  */
-public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario implements Constantes{
+public class Arbol_RN extends Arbol_binario implements Constantes{
     
-    private NodoB _root;
+    private NodoPadresUrls _root;
 
-    public void insert(NodoB pNodo){
+    public void insert(NodoPadresUrls pNodo){
         if(_root==null){
             _root=pNodo;
             changeColor(_root);
@@ -26,16 +27,16 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario impleme
         check(pNodo);
     }
     
-    private void insertAux(NodoB pPadre, NodoB pDato){
-        if(pDato.getDato().compareTo((dp)pPadre.getDato())<0){   
-            if(pPadre.getHizq()==null){
+    private void insertAux(NodoPadresUrls pPadre, NodoPadresUrls pDato){
+        if(pDato.getDato().compareTo(pPadre.getDato())<0){   
+            if((NodoPadresUrls)pPadre.getHizq()==null){
                 pPadre.setHizq(pDato);
                 pPadre.getHizq().setPadre(pPadre);
             }
             else
                 insertAux(pPadre.getHizq(),pDato);
         }
-        else if (pDato.getDato().compareTo((dp)pPadre.getDato())>0)
+        else if (pDato.getDato().compareTo(pPadre.getDato())>0)
             if(pPadre.getHder()==null){
                 pPadre.setHder(pDato);
                 pPadre.getHder().setPadre(pPadre);
@@ -44,13 +45,13 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario impleme
                 insertAux(pPadre.getHder(),pDato);
     }
     
-    private void check(NodoB pNodo){
+    private void check(NodoPadresUrls pNodo){
         if(pNodo==_root)
             return;
         checkAux(pNodo, pNodo.getPadre());
     }
     
-    private void checkAux(NodoB pNodo, NodoB pPadre){
+    private void checkAux(NodoPadresUrls pNodo, NodoPadresUrls pPadre){
         if (pPadre==null){
             if(pNodo.getColor()==Rojo)
                 changeColor(pNodo);
@@ -61,8 +62,8 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario impleme
             return;
         }
         else{
-            NodoB abuelo=pPadre.getPadre();
-            NodoB tio;
+            NodoPadresUrls abuelo=pPadre.getPadre();
+            NodoPadresUrls tio;
             if(abuelo.getHizq()==pPadre){
                 tio=abuelo.getHder();
                 if (pPadre.getColor()==Negro)
@@ -123,10 +124,10 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario impleme
         }
     }
     
-     private NodoB rotacionSIzq(NodoB pNodo){
-        NodoB padre= pNodo.getPadre();
-        NodoB hder= pNodo.getHder();
-        NodoB maxMIn= pNodo.getHder().getHizq();
+     private NodoPadresUrls rotacionSIzq(NodoPadresUrls pNodo){
+        NodoPadresUrls padre= pNodo.getPadre();
+        NodoPadresUrls hder= pNodo.getHder();
+        NodoPadresUrls maxMIn= pNodo.getHder().getHizq();
         hder.setPadre(padre);
         hder.setHizq(pNodo);
         pNodo.setPadre(hder);
@@ -144,10 +145,10 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario impleme
      * metodo para realizar rotacion simple a la Derecha
      * @param pNodo recibe un dato del tipo NodoB
      */
-    private NodoB rotacionSDer(NodoB pNodo){
-        NodoB padre= pNodo.getPadre();
-        NodoB hizq= pNodo.getHizq();
-        NodoB minMAx= pNodo.getHizq().getHder();
+    private NodoPadresUrls rotacionSDer(NodoPadresUrls pNodo){
+        NodoPadresUrls padre= pNodo.getPadre();
+        NodoPadresUrls hizq= pNodo.getHizq();
+        NodoPadresUrls minMAx= pNodo.getHizq().getHder();
         hizq.setHder(pNodo);
         hizq.setPadre(padre);
         pNodo.setPadre(hizq);
@@ -166,12 +167,12 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario impleme
      * @param pNodo este dato pertenece a la clase NodoUrl.
      * @return retorna el nodo que ahora es la cabeza del movimiento.
      */
-    private NodoB rotacionDDer(NodoB pNodo){
-        NodoB padre= pNodo.getPadre();
-        NodoB hizqG= pNodo.getHizq().getHder().getHizq();
-        NodoB hderG= pNodo.getHizq().getHder().getHder();
-        NodoB hizq= pNodo.getHizq();
-        NodoB toHead= pNodo.getHizq().getHder();
+    private NodoPadresUrls rotacionDDer(NodoPadresUrls pNodo){
+        NodoPadresUrls padre= pNodo.getPadre();
+        NodoPadresUrls hizqG= pNodo.getHizq().getHder().getHizq();
+        NodoPadresUrls hderG= pNodo.getHizq().getHder().getHder();
+        NodoPadresUrls hizq= pNodo.getHizq();
+        NodoPadresUrls toHead= pNodo.getHizq().getHder();
         toHead.setPadre(padre);
         toHead.setHizq(hizq);
         toHead.setHder(pNodo);
@@ -195,12 +196,12 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario impleme
      * @param pNodo dato que pertenece a la clase NodoUrl.
      * @return retorna el nodo que ahora es la cabeza del movimiento.
      */
-    private NodoB rotacionDIzq(NodoB pNodo){
-        NodoB padre= pNodo.getPadre();
-        NodoB hizqG= pNodo.getHder().getHizq().getHizq();
-        NodoB hderG= pNodo.getHder().getHizq().getHder();
-        NodoB hder= pNodo.getHder();
-        NodoB toHead= pNodo.getHder().getHizq();
+    private NodoPadresUrls rotacionDIzq(NodoPadresUrls pNodo){
+        NodoPadresUrls padre= pNodo.getPadre();
+        NodoPadresUrls hizqG= pNodo.getHder().getHizq().getHizq();
+        NodoPadresUrls hderG= pNodo.getHder().getHizq().getHder();
+        NodoPadresUrls hder= pNodo.getHder();
+        NodoPadresUrls toHead= pNodo.getHder().getHizq();
         toHead.setPadre(padre);
         toHead.setHder(hder);
         toHead.setHizq(pNodo);
@@ -219,30 +220,31 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends Arbol_binario impleme
         return toHead;
     }
     
-    private void changeColor(NodoB pNodo){
+    private void changeColor(NodoPadresUrls pNodo){
         if(pNodo.getColor()==0)
             pNodo.setColor(1);
         else
             pNodo.setColor(0);
     }
     
-    @Override
-    public void print() {
-        super.print(_root); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * metodo para imprimir nodos desde el arbol rojo y negro
+     */
+    public void print(){
+        printIOD(_root);
     }
     
-    public static void main(String[] args) {
-        Arbol_RN Nuevo = new Arbol_RN();
-        NodoB nuevo= new NodoB(6);
-        NodoB nuevo1= new NodoB(7);
-        NodoB nuevo2= new NodoB(8);
-        NodoB nuevo3= new NodoB(9);
-        NodoB nuevo4= new NodoB(10);
-        Nuevo.insert(nuevo);
-        Nuevo.insert(nuevo1);
-        Nuevo.insert(nuevo2);
-        Nuevo.insert(nuevo3);
-        Nuevo.insert(nuevo4);
-        Nuevo.print();
-    }   
+    /**
+     * metodo recursivo que va imprimiendo en orden el contenido del arbol
+     * @param tmp nodo padre
+     */
+    private void printIOD(NodoPadresUrls tmp){
+        if(tmp==null)
+            return;
+        printIOD(tmp.getHizq());
+        System.out.println(tmp.getDato());
+        printIOD(tmp.getHder());
+    }
+    
+    
 }

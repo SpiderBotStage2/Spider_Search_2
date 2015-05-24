@@ -15,19 +15,6 @@ import static logica.Constantes.crecimientoArreglo;
  */
 public class MetodosPArbolesSP extends Arbol_binario{
     
-    
-    /**
-     * metodo sobre escrito para ecnontrar un nodo en cualquier arbol que 
-     * implemente los metodos de esta clase.
-     * @param dato dato tipo generico, dato el cual queremos comparar.
-     * @param pNodo dato de la clase NodoUrl o NodoB, inicialmente es la raiz.
-     * @return retorna un boolean por si es cierto o no que existe el dato que 
-     * buscamos
-     */
-    public boolean find(Comparable dato, NodoUrl pNodo) {
-        return super.find(dato, pNodo); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     /**
      * metodo para revisar si el nodo ya existe en el arbol
      * @param pNodo dato de la clase NodoUrl, recibe el nodo que se busca.
