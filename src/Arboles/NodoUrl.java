@@ -12,7 +12,7 @@ import Listas.ListaUrls;
  */
 public class NodoUrl  extends NodoB{
     
-    private int countPpage;
+    private int _countPpage;
     private ListaUrls listaUrlsPadres;
     
     /**
@@ -24,10 +24,14 @@ public class NodoUrl  extends NodoB{
      * */
     public NodoUrl(String pData, int cantAp) {
         super(pData);
-        this.countPpage=cantAp;
+        this._countPpage=cantAp;
         this.listaUrlsPadres=new ListaUrls();
     }
 
+    public int getCont(){
+        return _countPpage;
+    }
+    
     @Override
     public NodoB getPadre() {
         return super.getPadre(); //To change body of generated methods, choose Tools | Templates.
@@ -59,7 +63,7 @@ public class NodoUrl  extends NodoB{
     }
     
     public void SumCont(int cant){
-        this.countPpage+=cant;
+        this._countPpage+=cant;
     }
     
     @Override
@@ -99,6 +103,6 @@ public class NodoUrl  extends NodoB{
      * @return 
      */
     public int LengthP(){
-        return countPpage;
+        return _countPpage;
     }
 }

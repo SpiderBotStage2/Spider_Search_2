@@ -5,12 +5,13 @@
  */
 package Arboles;
 
+import logica.Constantes;
 /**
  * clase para crear arboles auto-valanceables
  * @author osboxes
  * @param <dp>
  */
-public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
+public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP implements Constantes{
     
     private NodoUrl _root;
           
@@ -202,6 +203,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP{
      */
     private void reLocate(NodoUrl pDato, NodoUrl newInsert){
         _root=delete(pDato, _root);
+        newInsert.SumCont(uno);
         insert(newInsert);
     }
     
