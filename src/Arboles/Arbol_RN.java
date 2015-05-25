@@ -16,6 +16,15 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
     
     private NodoLUrl _root;
 
+    /**
+     * metodo para retornar la raiz y realizar recorridos en el arbol.
+     * @return retorna un dato de la clase NodoKeyword, este es la raiz del 
+     * arbol.
+     */
+    public NodoLUrl getroot() {
+        return _root;
+    }
+    
     public void insert(NodoLUrl pNodo){
         if(_root==null){
             _root=pNodo;

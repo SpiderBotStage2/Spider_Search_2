@@ -10,12 +10,20 @@ import logica.Constantes;
 /**
  * clase para crear arboles auto-valanceables
  * @author osboxes
- * @param <dp>
  */
-public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP implements Constantes{
+public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
     
     private NodoKeyword _root;
-          
+    
+    /**
+     * metodo para retornar la raiz y realizar recorridos en el arbol.
+     * @return retorna un dato de la clase NodoKeyword, este es la raiz del 
+     * arbol.
+     */
+    public NodoKeyword getRoot(){
+        return _root;
+    }
+    
     /**
      * metodo especial para ingresar datos en una rbol AVL
      * @param pDato dato que se ingres ay pertenece a la clase NodoKeyword

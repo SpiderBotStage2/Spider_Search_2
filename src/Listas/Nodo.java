@@ -10,7 +10,7 @@ package Listas;
  * @author Ellioth
  * @param <dp> generic para administracion de nodos
  */
-public class Nodo<dp> {
+public class Nodo<dp extends Comparable<dp>> {
     /**
      * atributos de la clase padre nodo
      */

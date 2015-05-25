@@ -10,8 +10,9 @@ package Listas;
  * que hagan listas o sirvan como bases de datos.
  *
  * @author osboxes <------asi se llama la maquina virtual en ubuntu
+ * @param <dp>
  */
-public class ListaSdoble <dp>{
+public class ListaSdoble <dp extends Comparable<dp>>{
     
     private Nodo _head;
     private Nodo _tail;

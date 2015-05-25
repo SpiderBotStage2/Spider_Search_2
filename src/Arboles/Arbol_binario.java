@@ -15,6 +15,14 @@ public class Arbol_binario <dp extends Comparable<dp>> {
     private NodoB _root;
     
     /**
+     * metodo para retornar la raiz y realizar recorridos en el arbol.
+     * @return retorna un dato de la clase NodoKeyword, este es la raiz del 
+     * arbol.
+     */
+    public NodoB getRoot(){
+        return _root;
+    }
+    /**
      * metodo para hacer inserciones en un arbol binario
      * @param dato generico 
      */
