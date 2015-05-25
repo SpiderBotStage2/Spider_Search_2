@@ -119,9 +119,8 @@ public class ventana extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        /*getTexto();
+        getTexto();
         search();
-        setInfo();*/
         VentanaOpciones listaDeOpciones;
         listaDeOpciones = new VentanaOpciones();
         listaDeOpciones.desplegar();

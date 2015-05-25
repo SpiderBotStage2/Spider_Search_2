@@ -109,8 +109,8 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
                         return;
                     }else{
                         changeColor(pNodo);changeColor(abuelo);
-                        abuelo=rotacionDDer(abuelo);
-                        checkAux(abuelo, abuelo.getPadre());
+                        pNodo=rotacionDDer(abuelo);
+                        checkAux(pNodo, pNodo.getPadre());
                         return;
                     }
                 }
@@ -122,7 +122,7 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
                 else if (tio.getColor()==Negro){
                     changeColor(abuelo);changeColor(pPadre);
                     abuelo=rotacionSDer(abuelo);
-                    checkAux(pPadre, pPadre.getPadre());
+                    checkAux(abuelo, abuelo.getPadre());
                     return;
                 }
             }else{
@@ -137,8 +137,8 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
                         return;
                     }else{
                         changeColor(pNodo);changeColor(abuelo);
-                        abuelo=rotacionDIzq(abuelo);
-                        checkAux(abuelo, abuelo.getPadre());
+                        pNodo=rotacionDIzq(abuelo);
+                        checkAux(pNodo, pNodo.getPadre());
                         return;
                     }
                 }
@@ -150,7 +150,7 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
                 else if (tio.getColor()==Negro){
                     changeColor(abuelo);changeColor(pPadre);
                     abuelo=rotacionSIzq(abuelo);
-                    checkAux(pPadre, pPadre.getPadre());
+                    checkAux(abuelo, abuelo.getPadre());
                     return;
                 }
             }
