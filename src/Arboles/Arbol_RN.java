@@ -25,6 +25,11 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
         return _root;
     }
     
+    /**
+     * metodo para insertar datos en el arbol.
+     * @param pNodo recibe un dato de la clase NodoLUrl, este sera el Url o
+     * direccion que termina de procesar el Thread.
+     */
     public void insert(NodoLUrl pNodo){
         if(_root==null){
             _root=pNodo;
@@ -36,6 +41,12 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
         check(pNodo);
     }
     
+    /**
+     * metodo recursivo para ingresar en el arbol
+     * @param pPadre dato de la clase NodoLUrl, este es la raiz inicialmente, 
+     * y sera a donde se aderir el nodo.
+     * @param pDato dato de la clase NodoLUrl, es el nodo que queremos ingresar.
+     */
     private void insertAux(NodoLUrl pPadre, NodoLUrl pDato){
         if(pDato.getDato().compareTo(pPadre.getDato())<0){   
             if((NodoLUrl)pPadre.getHizq()==null){
@@ -54,12 +65,25 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
                 insertAux(pPadre.getHder(),pDato);
     }
     
+    /**
+     * metodo para revisar que el arbol cumpla con los requerimientos 
+     * necesarios.
+     * @param pNodo dato de la clase NodoLUrl, recibe el nodo que acabamos de 
+     * ingresar.
+     */
     private void check(NodoLUrl pNodo){
         if(pNodo==_root)
             return;
         checkAux(pNodo, pNodo.getPadre());
     }
     
+    /**
+     * metodo recursivo par air revisando el arbol desde abajo hacia arriba.
+     * @param pNodo dato de la clase NodoLUrl, el nodo el cual acabamos de 
+     * ingresar.
+     * @param pPadre dato de la clase NodoLUrl, el padre nodo que acabamos de 
+     * ingresar.
+     */
     private void checkAux(NodoLUrl pNodo, NodoLUrl pPadre){
         if (pPadre==null){
             if(pNodo.getColor()==Rojo)
@@ -133,7 +157,13 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
         }
     }
     
-     private NodoLUrl rotacionSIzq(NodoLUrl pNodo){
+    /**
+     * metodo para realizar una rotacion simple hacia la izquierda contra un
+     * nodo conflictivo.
+     * @param pNodo dato de la clase NodoLUrl, es el nodo que vamos a rotar.
+     * @return retorna la cabeza del resultado de la rotacion.
+     */
+    private NodoLUrl rotacionSIzq(NodoLUrl pNodo){
         NodoLUrl padre= pNodo.getPadre();
         NodoLUrl hder= pNodo.getHder();
         NodoLUrl maxMIn= pNodo.getHder().getHizq();
@@ -229,6 +259,11 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
         return toHead;
     }
     
+    /**
+     * metodo para intercambiar el color del nodo
+     * @param pNodo dato de la clase NodoLUrl, es el nodo al cual queremos 
+     * intercambiarle el color.
+     */
     private void changeColor(NodoLUrl pNodo){
         if(pNodo.getColor()==0)
             pNodo.setColor(1);

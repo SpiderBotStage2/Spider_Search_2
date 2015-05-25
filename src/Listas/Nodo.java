@@ -17,6 +17,7 @@ public class Nodo<dp extends Comparable<dp>> {
     private dp dato;
     private Nodo NextNodo;
     private Nodo prevNodo;
+    
     /**
      * metodo para ingresar el dato que 
      * se va a contener en el nodo creado
@@ -25,6 +26,7 @@ public class Nodo<dp extends Comparable<dp>> {
     public Nodo(dp pData){
         this.dato= pData;
     }
+    
     /**
      * devuelve el contenido del nodo
      * @return 
@@ -32,6 +34,7 @@ public class Nodo<dp extends Comparable<dp>> {
     public dp getData(){
         return  dato;
     }
+    
     /**
      * si se le desea cambiar el dato 
      * a un nodo, se le ingresa como el 
@@ -41,6 +44,7 @@ public class Nodo<dp extends Comparable<dp>> {
     public void setData(dp dato){
         this.dato=dato;
     }
+    
     /**
      * devuelve el nodo siguiente de 
      * el cual estamos trabajando
@@ -49,6 +53,7 @@ public class Nodo<dp extends Comparable<dp>> {
     public Nodo getNext(){
         return NextNodo;
     }
+    
     /**
      * devuelve el nodo anterior del
      * cual nos entramos
@@ -57,6 +62,7 @@ public class Nodo<dp extends Comparable<dp>> {
     public Nodo getPrev(){
         return prevNodo;
     }
+    
     /**
      * establece como parametro de entrada
      * un nodo para colocarlo como siguiente
@@ -66,6 +72,7 @@ public class Nodo<dp extends Comparable<dp>> {
     public void setNext(Nodo pNodo){
         this.NextNodo=pNodo;
     }
+    
     /**
      * establece un como parametro de entrada
      * el nodo que se encuentra anterior al 
@@ -74,5 +81,5 @@ public class Nodo<dp extends Comparable<dp>> {
      */
     public void setPrev(Nodo pNodo){
         this.prevNodo=pNodo;
-    }    
+    }
 }
