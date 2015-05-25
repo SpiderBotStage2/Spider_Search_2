@@ -17,12 +17,12 @@ public class MetodosPArbolesSP extends Arbol_binario{
     
     /**
      * metodo para revisar si el nodo ya existe en el arbol
-     * @param pNodo dato de la clase NodoUrl, recibe el nodo que se busca.
-     * @param _root dato de la clase NodoUrl, esta va a ser la raiz.
-     * @return dato de la clase NodoUrl y retorna un nulo si no existe y un nodo
+     * @param pNodo dato de la clase NodoKeyword, recibe el nodo que se busca.
+     * @param _root dato de la clase NodoKeyword, esta va a ser la raiz.
+     * @return dato de la clase NodoKeyword y retorna un nulo si no existe y un nodo
      * valido, si existe el nodo.
      */
-    public NodoUrl exist(NodoUrl pNodo, NodoUrl _root){
+    public NodoKeyword exist(NodoKeyword pNodo, NodoKeyword _root){
         if (pNodo.getDato().compareTo(_root.getDato())==0)
             return _root;
         else
@@ -32,20 +32,20 @@ public class MetodosPArbolesSP extends Arbol_binario{
     /**
      * metodo para revisar si existe un nodo en el arbol, la manera implementada
      * es utilizando recursividad y realizando un recorrido en orden.
-     * @param pNodo Dato de la clase NodoUrl, el nodo con que compara.
-     * @param pDato Dato de la clase NodoUrl, el nodo al que se le compara.
+     * @param pNodo Dato de la clase NodoKeyword, el nodo con que compara.
+     * @param pDato Dato de la clase NodoKeyword, el nodo al que se le compara.
      * @return retorna un null si no existe, si existe se retorna un dato no 
      * nulo.
      */
-    private NodoUrl existAux(NodoUrl pNodo, NodoUrl pDato){
+    private NodoKeyword existAux(NodoKeyword pNodo, NodoKeyword pDato){
         if (pNodo==null)
             return null;
-        NodoUrl hizq= existAux((NodoUrl)pNodo.getHizq(), pDato);
+        NodoKeyword hizq= existAux((NodoKeyword)pNodo.getHizq(), pDato);
         if (hizq!=null)
             return hizq;
         if(pNodo.getDato().compareTo(pDato.getDato())==0)
             return pNodo;
-        NodoUrl hder=existAux((NodoUrl)pNodo.getHder(), pDato);
+        NodoKeyword hder=existAux((NodoKeyword)pNodo.getHder(), pDato);
         if (hder!=null)
             return hder;
         else return null;
@@ -65,17 +65,17 @@ public class MetodosPArbolesSP extends Arbol_binario{
      * @param pNodo recibe un dato del tipo NodoB
      * @return retorna el nodo que ahora sera la cabeza de las rotacion.
      */
-    public NodoUrl rotacionSIzq(NodoUrl pNodo){
-        NodoUrl padre= (NodoUrl)pNodo.getPadre();
-        NodoUrl hder= (NodoUrl)pNodo.getHder();
-        NodoUrl maxMIn= (NodoUrl)pNodo.getHder().getHizq();
+    public NodoKeyword rotacionSIzq(NodoKeyword pNodo){
+        NodoKeyword padre= (NodoKeyword)pNodo.getPadre();
+        NodoKeyword hder= (NodoKeyword)pNodo.getHder();
+        NodoKeyword maxMIn= (NodoKeyword)pNodo.getHder().getHizq();
         hder.setPadre(padre);
         hder.setHizq(pNodo);
         pNodo.setPadre(hder);
         pNodo.setHder(maxMIn);
-        if(padre!=null && (NodoUrl)padre.getHder()==pNodo)
+        if(padre!=null && (NodoKeyword)padre.getHder()==pNodo)
             padre.setHder(hder);
-        else if(padre!=null && (NodoUrl)padre.getHizq()==pNodo)
+        else if(padre!=null && (NodoKeyword)padre.getHizq()==pNodo)
             padre.setHizq(hder);
         if(maxMIn!=null)
             maxMIn.setPadre(pNodo);
@@ -87,17 +87,17 @@ public class MetodosPArbolesSP extends Arbol_binario{
      * @param pNodo recibe un dato del tipo NodoB
      * @return retorna el nodo que ahora sera la cabeza luego de la rotacion
      */
-    public NodoUrl rotacionSDer(NodoUrl pNodo){
-        NodoUrl padre=(NodoUrl)pNodo.getPadre();
-        NodoUrl hizq= (NodoUrl)pNodo.getHizq();
-        NodoUrl minMAx=(NodoUrl)pNodo.getHizq().getHder();
+    public NodoKeyword rotacionSDer(NodoKeyword pNodo){
+        NodoKeyword padre=(NodoKeyword)pNodo.getPadre();
+        NodoKeyword hizq= (NodoKeyword)pNodo.getHizq();
+        NodoKeyword minMAx=(NodoKeyword)pNodo.getHizq().getHder();
         hizq.setHder(pNodo);
         hizq.setPadre(padre);
         pNodo.setPadre(hizq);
         pNodo.setHizq(minMAx);
-        if(padre!=null && (NodoUrl)padre.getHder()==pNodo)
+        if(padre!=null && (NodoKeyword)padre.getHder()==pNodo)
             padre.setHder(hizq);
-        else if(padre!=null && (NodoUrl)padre.getHizq()==pNodo)
+        else if(padre!=null && (NodoKeyword)padre.getHizq()==pNodo)
             padre.setHizq(hizq);
         if(minMAx!=null)
             minMAx.setPadre(pNodo);
@@ -106,15 +106,15 @@ public class MetodosPArbolesSP extends Arbol_binario{
     
     /**
      * metodo para realizar una doble rotacion hacia la derecha.
-     * @param pNodo este dato pertenece a la clase NodoUrl.
+     * @param pNodo este dato pertenece a la clase NodoKeyword.
      * @return retorna el nodo que ahora es la cabeza del movimiento.
      */
-    public NodoUrl rotacionDDer(NodoUrl pNodo){
-        NodoUrl padre= (NodoUrl)pNodo.getPadre();
-        NodoUrl hizqG= (NodoUrl)pNodo.getHizq().getHder().getHizq();
-        NodoUrl hderG= (NodoUrl)pNodo.getHizq().getHder().getHder();
-        NodoUrl hizq= (NodoUrl)pNodo.getHizq();
-        NodoUrl toHead= (NodoUrl)pNodo.getHizq().getHder();
+    public NodoKeyword rotacionDDer(NodoKeyword pNodo){
+        NodoKeyword padre= (NodoKeyword)pNodo.getPadre();
+        NodoKeyword hizqG= (NodoKeyword)pNodo.getHizq().getHder().getHizq();
+        NodoKeyword hderG= (NodoKeyword)pNodo.getHizq().getHder().getHder();
+        NodoKeyword hizq= (NodoKeyword)pNodo.getHizq();
+        NodoKeyword toHead= (NodoKeyword)pNodo.getHizq().getHder();
         toHead.setPadre(padre);
         toHead.setHizq(hizq);
         toHead.setHder(pNodo);
@@ -135,15 +135,15 @@ public class MetodosPArbolesSP extends Arbol_binario{
     
     /**
      * metodo para realizar rotaciones hacia la izquierda.
-     * @param pNodo dato que pertenece a la clase NodoUrl.
+     * @param pNodo dato que pertenece a la clase NodoKeywords.
      * @return retorna el nodo que ahora es la cabeza del movimiento.
      */
-    public NodoUrl rotacionDIzq(NodoUrl pNodo){
-        NodoUrl padre= (NodoUrl)pNodo.getPadre();
-        NodoUrl hizqG= (NodoUrl)pNodo.getHder().getHizq().getHizq();
-        NodoUrl hderG= (NodoUrl)pNodo.getHder().getHizq().getHder();
-        NodoUrl hder= (NodoUrl)pNodo.getHder();
-        NodoUrl toHead= (NodoUrl)pNodo.getHder().getHizq();
+    public NodoKeyword rotacionDIzq(NodoKeyword pNodo){
+        NodoKeyword padre= (NodoKeyword)pNodo.getPadre();
+        NodoKeyword hizqG= (NodoKeyword)pNodo.getHder().getHizq().getHizq();
+        NodoKeyword hderG= (NodoKeyword)pNodo.getHder().getHizq().getHder();
+        NodoKeyword hder= (NodoKeyword)pNodo.getHder();
+        NodoKeyword toHead= (NodoKeyword)pNodo.getHder().getHizq();
         toHead.setPadre(padre);
         toHead.setHder(hder);
         toHead.setHizq(pNodo);
@@ -182,7 +182,7 @@ public class MetodosPArbolesSP extends Arbol_binario{
      * @param pNodo el nodo raiz del arbol
      * @return retorna el nodo Aux convertido ahora en la raiz
      */
-    public NodoUrl delete(NodoUrl dato, NodoUrl pNodo){
+    public NodoKeyword delete(NodoKeyword dato, NodoKeyword pNodo){
         if(pNodo==null)
             return null;
         return deleteSP(dato, pNodo);
@@ -191,41 +191,41 @@ public class MetodosPArbolesSP extends Arbol_binario{
     /**
      * metodo especial, recursivo, que se utiliza para eliminar un nodo en el 
      * arbol AVL.
-     * @param dato dato de la clase NodoUrl, se le ingresa el nodo a eliminar.
-     * @param pNodo dato de la clase NodoUrl, se ingresa el nodo acomparacion.
+     * @param dato dato de la clase NodoKeyword, se le ingresa el nodo a eliminar.
+     * @param pNodo dato de la clase NodoKeyword, se ingresa el nodo acomparacion.
      * @return retorna la nueva raiz del arbol, por si acaso se cambia o 
      * elimina la raiz.
      */
-    private NodoUrl deleteSP(NodoUrl dato, NodoUrl pNodo){
+    private NodoKeyword deleteSP(NodoKeyword dato, NodoKeyword pNodo){
         if(pNodo.getDato().equals(dato.getDato())){
-            if((NodoUrl)pNodo.getHizq()==null)
-                return (NodoUrl)pNodo.getHder();
-            else if ((NodoUrl)pNodo.getHder()==null)
-                return (NodoUrl)pNodo.getHizq();
+            if((NodoKeyword)pNodo.getHizq()==null)
+                return (NodoKeyword)pNodo.getHder();
+            else if ((NodoKeyword)pNodo.getHder()==null)
+                return (NodoKeyword)pNodo.getHizq();
             else{
-                NodoUrl Aux = (NodoUrl)minMax(pNodo.getHder());
+                NodoKeyword Aux = (NodoKeyword)minMax(pNodo.getHder());
                 if(Aux==pNodo.getHder()){
                     Aux.setHizq(pNodo.getHizq());
                     return Aux;
                 }
-                NodoUrl menor= (NodoUrl)Aux.getHizq();
-                menor.setHizq((NodoUrl)pNodo.getHizq());
-                NodoUrl menor_hder= (NodoUrl)menor.getHder();
-                menor.setHder((NodoUrl)pNodo.getHder());
-                pNodo.setHder((NodoUrl)menor_hder);
-                if((NodoUrl)Aux.getHizq()==menor)
-                    Aux.setHizq((NodoUrl)menor_hder);
+                NodoKeyword menor= (NodoKeyword)Aux.getHizq();
+                menor.setHizq((NodoKeyword)pNodo.getHizq());
+                NodoKeyword menor_hder= (NodoKeyword)menor.getHder();
+                menor.setHder((NodoKeyword)pNodo.getHder());
+                pNodo.setHder((NodoKeyword)menor_hder);
+                if((NodoKeyword)Aux.getHizq()==menor)
+                    Aux.setHizq((NodoKeyword)menor_hder);
                 else
-                    Aux.setHder((NodoUrl)menor_hder);
+                    Aux.setHder((NodoKeyword)menor_hder);
                 return menor;
             }
         }
         else if(dato.LengthP()<pNodo.LengthP()){
-            pNodo.setHizq(deleteSP(dato, (NodoUrl)pNodo.getHizq()));
+            pNodo.setHizq(deleteSP(dato, (NodoKeyword)pNodo.getHizq()));
             return pNodo;
         }
         else{
-            pNodo.setHder(deleteSP(dato, (NodoUrl)pNodo.getHder()));
+            pNodo.setHder(deleteSP(dato, (NodoKeyword)pNodo.getHder()));
             return pNodo;
         }
     }

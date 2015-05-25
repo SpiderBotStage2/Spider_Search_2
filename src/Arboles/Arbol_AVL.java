@@ -5,6 +5,7 @@
  */
 package Arboles;
 
+import Listas.NodoLUrl;
 import logica.Constantes;
 /**
  * clase para crear arboles auto-valanceables
@@ -13,17 +14,17 @@ import logica.Constantes;
  */
 public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP implements Constantes{
     
-    private NodoUrl _root;
+    private NodoKeyword _root;
           
     /**
      * metodo especial para ingresar datos en una rbol AVL
-     * @param pDato dato que se ingres ay pertenece a la clase NodoUrl
+     * @param pDato dato que se ingres ay pertenece a la clase NodoKeyword
      */
-    public void insert(NodoUrl pDato){
+    public void insert(NodoKeyword pDato){
         if (_root==null)
             _root=pDato;
         else{
-            NodoUrl ifExist= exist(pDato, _root);
+            NodoKeyword ifExist= exist(pDato, _root);
             if (ifExist!=null && ifExist!=pDato)
                 reLocate(ifExist, pDato);
             else
@@ -34,11 +35,11 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP imp
     
     /**
      * metodo para ingresar datos en un arbol de manera recursiva.
-     * @param pDato dato que se ingresa perteneciente a la clase NodoUrl.
+     * @param pDato dato que se ingresa perteneciente a la clase NodoKeyword.
      * @param pNodo dato padre para recursionar, pertenece a la clase 
-     * NodoUrl.
+     * NodoKeyword.
      */
-    private void insertAux(NodoUrl pDato, NodoUrl pRaiz){
+    private void insertAux(NodoKeyword pDato, NodoKeyword pRaiz){
         if (pRaiz.LengthP()==pDato.LengthP()){
             if(pRaiz.getDato().compareTo(pDato.getDato())<0){
                 overPlaceDer(pDato, pRaiz);
@@ -50,18 +51,18 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP imp
             if(pRaiz.LengthP()>pDato.LengthP()){   
                 if(pRaiz.getHizq()==null){
                     pRaiz.setHizq(pDato);
-                    ((NodoUrl)pRaiz.getHizq()).setPadre(pRaiz);
+                    ((NodoKeyword)pRaiz.getHizq()).setPadre(pRaiz);
                 }
                 else
-                    insertAux(pDato, (NodoUrl)pRaiz.getHizq());
+                    insertAux(pDato, (NodoKeyword)pRaiz.getHizq());
             }
             else{
                 if(pRaiz.getHder()==null){
                     pRaiz.setHder(pDato);
-                    ((NodoUrl)pRaiz.getHder()).setPadre(pRaiz);
+                    ((NodoKeyword)pRaiz.getHder()).setPadre(pRaiz);
                 }
                 else
-                    insertAux(pDato,(NodoUrl)pRaiz.getHder());
+                    insertAux(pDato,(NodoKeyword)pRaiz.getHder());
             }
         }
     }
@@ -72,7 +73,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP imp
      * @param Hder hijo derecho del nodo
      * @return retorna un dato int que se establece como profundidad del nodo
      */
-    private int Heigth(NodoUrl Hizq, NodoUrl Hder){
+    private int Heigth(NodoKeyword Hizq, NodoKeyword Hder){
         if(Hizq!=null&&Hder!=null)
             return Math.max(Hizq.getDepth(),Hder.getDepth())+1;
         else if(Hizq!=null)
@@ -90,7 +91,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP imp
      * @return retrona un dato tipo int, si se retorna un dato con valor
      * de cero es que se encuentra equilibrado
      */
-    private double FactorEquilibrio(NodoUrl Hizq, NodoUrl Hder){
+    private double FactorEquilibrio(NodoKeyword Hizq, NodoKeyword Hder){
         if(Hizq!=null&&Hder!=null)
             return Hizq.getDepth()-Hder.getDepth();
         else if(Hizq!=null)
@@ -106,7 +107,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP imp
       * este mismo realiza las rotaciones.
       */
      private void check(){
-         NodoUrl tmp= _root;
+         NodoKeyword tmp= _root;
          checkAux(tmp);
      }
     
@@ -115,13 +116,13 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP imp
      * y revisa si se ocupan hacer rotaciones en el arbol.
      * @param pNodo recibe un dato del tipo NodoB
      */
-    private void checkAux(NodoUrl pNodo){
+    private void checkAux(NodoKeyword pNodo){
         if(pNodo==null)
             return;
-        checkAux((NodoUrl)pNodo.getHizq());
-        checkAux((NodoUrl)pNodo.getHder());
-        pNodo.setDepth(Heigth((NodoUrl)pNodo.getHizq(), (NodoUrl)pNodo.getHder()));
-        pNodo.setFE(FactorEquilibrio((NodoUrl)pNodo.getHizq(), (NodoUrl)pNodo.getHder()));
+        checkAux((NodoKeyword)pNodo.getHizq());
+        checkAux((NodoKeyword)pNodo.getHder());
+        pNodo.setDepth(Heigth((NodoKeyword)pNodo.getHizq(), (NodoKeyword)pNodo.getHder()));
+        pNodo.setFE(FactorEquilibrio((NodoKeyword)pNodo.getHizq(), (NodoKeyword)pNodo.getHder()));
         //System.out.println("Profundidad: "+pNodo.getDepth()+"; Factor de equilibrio: "+ pNodo.getFE());
         if(pNodo==_root){
             if(pNodo.getFE()>=2){
@@ -151,26 +152,37 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP imp
         }
     }
     
+    /**
+     * metodo para eliminar dato del arbol AVL.
+     * @param dato recibe un String como dato para eliminar.
+     */
     public void delete(String dato) {
         exist(dato);
         super.delete(dato, _root);
         check();
     }
     
-    public NodoUrl exist(String pDato) {
-        NodoUrl pNodo= new NodoUrl(pDato, 1);
-        return super.exist(pNodo, _root); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * metodo para encontrar un nodo en el arbol, utiliza el parametro de 
+     * busqueda en orden.
+     * @param pDato dato del tipo String, dato el cual buscaremos.
+     * @return retorna un nulo si no existe el nodo, un nodo completo si existe
+     * el nodo.
+     */
+    public NodoKeyword exist(String pDato) {
+        return super.exist(new NodoKeyword(pDato, new NodoLUrl("",0)), _root);
     }
+    
     /**
      * metodo para realizar una colocacion forzada en la izquierda por 
      * si una palabra tiene la misma cantidad de datos que otra.
      * @param pNodo dato que incialmente el padre de donde va ingresar
      * @param padre dato de que se va ingresar
      * ambos datos, tanto como pNodo y padre son datos que pertenecen a la 
-     * clase NodoUrl.
+     * clase NodoKeyword.
      */
-    private void overPlaceIzq(NodoUrl pNodo, NodoUrl padre){
-        NodoUrl hijo = (NodoUrl)padre.getHizq();
+    private void overPlaceIzq(NodoKeyword pNodo, NodoKeyword padre){
+        NodoKeyword hijo = (NodoKeyword)padre.getHizq();
         padre.setHizq(pNodo);
         pNodo.setPadre(padre);
         pNodo.setHizq(hijo);
@@ -184,10 +196,10 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP imp
      * @param pNodo dato que incialmente el padre de donde va ingresar
      * @param padre dato de que se va ingresar
      * ambos datos, tanto como pNodo y padre son datos que pertenecen a la 
-     * clase NodoUrl.
+     * clase NodoKeyword.
      */
-    private void overPlaceDer(NodoUrl pNodo, NodoUrl padre){
-        NodoUrl hijo = (NodoUrl)padre.getHder();
+    private void overPlaceDer(NodoKeyword pNodo, NodoKeyword padre){
+        NodoKeyword hijo = (NodoKeyword)padre.getHder();
         padre.setHder(pNodo);
         pNodo.setPadre(padre);
         pNodo.setHder(hijo);
@@ -198,12 +210,14 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArbolesSP imp
     /**
      * agarra el dato que se acaba de ingresar y compara si es necesario 
      * hacer recolocacion ya que el arbol se desorganiza.
-     * @param pDato dato que pertenece a la clase NodoUrl y se usa para 
+     * @param pDato dato que pertenece a la clase NodoKeyword y se usa para 
      * representar al que se va a mover.
      */
-    private void reLocate(NodoUrl pDato, NodoUrl newInsert){
+    private void reLocate(NodoKeyword pDato, NodoKeyword newInsert){
         _root=delete(pDato, _root);
         newInsert.SumCont(uno);
+        newInsert.getListaUrls().enQueue_none_repeat(
+                pDato.getListaUrls().getHead());
         insert(newInsert);
     }
     
