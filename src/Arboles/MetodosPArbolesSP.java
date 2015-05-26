@@ -206,6 +206,7 @@ public class MetodosPArbolesSP extends Arbol_binario{
                 NodoKeyword Aux = minMax((NodoKeyword)pNodo.getHder());
                 NodoKeyword padre=(NodoKeyword)pNodo.getPadre();
                 if(Aux==pNodo.getHder()){
+                    pNodo.getHizq().setPadre(Aux);
                     Aux.setHizq(pNodo.getHizq());
                     if(padre!=null){
                         if(padre.getHder()==pNodo)
@@ -220,28 +221,33 @@ public class MetodosPArbolesSP extends Arbol_binario{
                 NodoKeyword menor_hder= (NodoKeyword)menor.getHder();
                 menor.setHder((NodoKeyword)pNodo.getHder());
                 pNodo.setHder((NodoKeyword)menor_hder);
-                if((NodoKeyword)Aux.getHizq()==menor)
+                if((NodoKeyword)Aux.getHizq()==menor){
                     Aux.setHizq((NodoKeyword)menor_hder);
-                else
+                    menor_hder.setPadre(Aux);
+                }
+                else{
                     Aux.setHder((NodoKeyword)menor_hder);
-                if(padre!=null){
+                    menor_hder.setPadre(Aux);
+                    if(padre!=null){
                         if(padre.getHder()==pNodo)
                             padre.setHder(menor);
                         else
                             padre.setHizq(menor);
                     }
+                }
                 return menor;
             }
         }
         else if(dato.LengthP()<pNodo.LengthP()){
             pNodo.setHizq(deleteSP(dato, (NodoKeyword)pNodo.getHizq()));
-            
-            pNodo.getHizq().setPadre(pNodo);
+            if(pNodo.getHizq()!=null)
+                pNodo.getHizq().setPadre(pNodo);
             return pNodo;
         }
         else{
             pNodo.setHder(deleteSP(dato, (NodoKeyword)pNodo.getHder()));
-            pNodo.getHder().setPadre(pNodo);
+            if(pNodo.getHder()!=null)
+                pNodo.getHder().setPadre(pNodo);
             return pNodo;
         }
     }
