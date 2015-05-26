@@ -3,50 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Listas;
 
 /**
  * clase creada para la base de datos para los urls que se van ingresando 
  * para ser procesados por los threads hijos del SpiderBot
  * @author osboxes <-------------------- nombre de la VM de ubuntu
- * @param <dp> generico para la clase
  */
-public class ListaUrls<dp> extends ListaSdoble{
+public class ListaUrls{
     
     private NodoLUrl _head;
     private NodoLUrl _tail;
+    private int _CantTotal;
 
-    @Override
+    /**
+     * metodo para devolver la cabeza de la lista.
+     * @return retorna un dato de la clase NodoLUrl
+     */
     public NodoLUrl getHead(){
         return _head;
-    }
-    
-    @Override
-    public NodoLUrl getTail(){
-        return _tail;
     }
     
     /**
      * metodo especial para encolar a la lista de Urls que recibe la 
      * urls que se quiere y se le ingresa el nivel de profundidad.
-     * @param dato la url que se ingresa 
-     * @param depth nivel de profundidad.
+     * @param pDato la url que se ingresa 
+     * @param pDepth nivel de profundidad.
      */
-    public void enQueue(dp dato,int depth){
+    public void enQueue(NodoLUrl pDato){
         if(_head==null){
-            _head=_tail= new NodoLUrl(dato);
-            _head.setDepth(depth);
+            _head=_tail= pDato;
         }
         else{
             NodoLUrl tmp1=_tail;
-            tmp1.setNext(new NodoLUrl(dato));
+            tmp1.setNext(pDato);
             _tail=(NodoLUrl)tmp1.getNext();
-            _tail.setDepth(depth);
         }
     }
     
     /**
      * metodo para borrar los head una vez que una Url ya se haya seleccionado
+     * @return 
      */
     public NodoLUrl deQueue(){
         NodoLUrl tmp= _head;
@@ -58,11 +55,10 @@ public class ListaUrls<dp> extends ListaSdoble{
      * funcion para imprimir todo el contendio de la lista con la profundidad 
      * de cada uno de los nodos.
      */
-    @Override
     public void print(){
         NodoLUrl tmp=_head;
         while (tmp!=null){
-            System.out.println(tmp.getData()+" profundidad: "+ tmp.geDepth());
+            System.out.println(tmp.getDato()+" profundidad: "+ tmp.geDepth());
             tmp=(NodoLUrl)tmp.getNext();
         }
     }
@@ -72,16 +68,16 @@ public class ListaUrls<dp> extends ListaSdoble{
      * @param dato
      * @param depth 
      */
-    public void enQueue_none_repeat(dp dato, int depth){
+    public void enQueue_none_repeat(NodoLUrl dato){
         NodoLUrl tmp= _head;
         boolean check= false;
         while(tmp!=null&&!check){
-            if(tmp.getData().equals(dato))
+            if(tmp.getDato().equals(dato.getDato()))
                 check=true;
             tmp= (NodoLUrl)tmp.getNext();
         }
         if(!check){
-            enQueue(dato, depth);
+            enQueue(dato);
         }
         else
             System.out.println("urlrepetida: "+ dato);
@@ -99,5 +95,25 @@ public class ListaUrls<dp> extends ListaSdoble{
             i++;
         }
         return i;
+    }
+    
+    /**
+     * metodo establecer la cantidad total de palabras que se encuentran en el
+     * documento o archivo que estamos revisando.
+     * @param cant dato entero, es la cantidad de palabras en total que 
+     * encontramos.
+     */
+    public void setCant(int cant){
+        this._CantTotal=cant;
+    }
+    
+    /**
+     * metodo para devolver la cantidad total de palabras que se encuentran en 
+     * el documento.
+     * @return retorna un dato tipo entero y este es la cantidad de palabras 
+     * que existen en el documento.
+     */
+    public int getCant(){
+        return _CantTotal;
     }
 }

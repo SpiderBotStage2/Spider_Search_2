@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Arboles;
 
 /**
  * clase para crear arboles binarios
@@ -14,6 +14,14 @@ public class Arbol_binario <dp extends Comparable<dp>> {
     
     private NodoB _root;
     
+    /**
+     * metodo para retornar la raiz y realizar recorridos en el arbol.
+     * @return retorna un dato de la clase NodoKeyword, este es la raiz del 
+     * arbol.
+     */
+    public NodoB getRoot(){
+        return _root;
+    }
     /**
      * metodo para hacer inserciones en un arbol binario
      * @param dato generico 
@@ -196,8 +204,6 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         }
     }
     
-    
-    
     /**
      * metodo para realizar un impresion en order del arbol en orden 
      */
@@ -214,6 +220,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         NodoB tmp=pNodo;
         printIOD(tmp);
     }
+    
     /**
      * metodo recursivo que va imprimiendo en orden el contenido del arbol
      * @param tmp nodo padre
@@ -222,7 +229,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         if(tmp==null)
             return;
         printIOD(tmp.getHizq());
-        System.out.println(tmp.getDato());
+        System.out.println(tmp.getDato()+ "color: "+ tmp.getColor());
         printIOD(tmp.getHder());
     }
 }

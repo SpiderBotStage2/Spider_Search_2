@@ -3,18 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Xml;
 
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import Listas.ListaSdoble;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
-public class ReadUrls {
+public class ReadSpiderBotAttr {
     
     private File path;
     private DocumentBuilder Dbuilder;
@@ -29,7 +30,7 @@ public class ReadUrls {
      * nos inicializa las listas
      * que se van a estar urilizando
      */
-    public ReadUrls(){
+    public ReadSpiderBotAttr(){
         Urls = new String[2];//tamaño del arreglo
         SpAtri= new ListaSdoble();
     }

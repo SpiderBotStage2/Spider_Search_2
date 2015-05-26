@@ -9,13 +9,11 @@ package logica;
  *
  * @author osboxes
  */
-public class Heap {
+public class Heap implements Constantes{
     
-    private static final int _root=0;
-    private int _tail=_root;
-    private int _MaxSize=1;
-    private static final double _growP=2;
-    private int _depthSize=0;
+    private int _tail=cero;
+    private int _MaxSize=uno;
+    private int _depthSize=cero;
     private String[] _arreglo= new String[_MaxSize];
     
     public void insert(String dato){
@@ -29,45 +27,45 @@ public class Heap {
     private void check(){
         if (_tail==_MaxSize)
             return;
-        checkAux((_root*2)+1);
-        checkAux((_root*2)+2);
+        checkAux(uno);
+        checkAux(dos);
     }
     
     private void checkAux(int pHijo){
         if(pHijo>= _MaxSize)
             return;
-        checkAux((pHijo*2)+1);
-        checkAux((pHijo*2) +2);
-        if(_arreglo[pHijo]!=null && _arreglo[pHijo/2].compareTo(_arreglo[pHijo])>0)
+        checkAux((pHijo*dos)+uno);
+        checkAux((pHijo*dos) +dos);
+        if(_arreglo[pHijo]!=null && _arreglo[pHijo/dos].compareTo(_arreglo[pHijo])>cero)
             swap(pHijo);
     }
     
     private void growArray(){
         _depthSize++;
-        double newMAxsize= (Math.pow(_growP,_depthSize))+_MaxSize;
+        double newMAxsize= (Math.pow(dos,_depthSize))+_MaxSize;
         String[] newArreglo= new String[(int)newMAxsize];
-        System.arraycopy(_arreglo, 0, newArreglo, 0, _MaxSize);
+        System.arraycopy(_arreglo, cero, newArreglo, cero, _MaxSize);
         _MaxSize=(int)newMAxsize;
         _arreglo=newArreglo;
     }
     
     private void swap(int pHijo){
-        int Ipadre= pHijo/2;
+        int Ipadre= pHijo/dos;
         String hijo=_arreglo[pHijo];
         _arreglo[pHijo]=_arreglo[Ipadre];
         _arreglo[Ipadre]=hijo;
     }
     
     public void print(){
-        int indice=_root;
+        int indice=cero;
         printAux(indice);
     }
     
     private void printAux(int pIndice){
         if(pIndice>=_MaxSize)
             return;
-        printAux((pIndice*2)+1);
+        printAux((pIndice*dos)+uno);
         System.out.println(_arreglo[pIndice]);
-        printAux((pIndice*2)+2);
+        printAux((pIndice*dos)+dos);
     }
 }

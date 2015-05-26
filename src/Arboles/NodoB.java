@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Arboles;
 
+import logica.Constantes;
 /**
  * clase para nodos de cualquier tipo de arbol
  * @author osboxes
  * @param <dp>
  */
-public class NodoB <dp extends Comparable<dp>>{
+public class NodoB <dp extends Comparable<dp>> implements Constantes{
     
     private dp _dato;
     private NodoB _Hizq;
@@ -18,7 +19,7 @@ public class NodoB <dp extends Comparable<dp>>{
     private NodoB padre;
     private double _FE;
     private int _depth;
-    private int color;
+    private int color=Rojo;//color rojo, cero siempre es rojo
     
     public NodoB(dp dato){
         this._dato=dato;

@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Arboles;
+
 
 /**
  * clase para crear arboles splay
@@ -181,6 +182,11 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
             hderP.setPadre(abuelo);
     }
     
+    /**
+     * metodo para hacer una rotacion cuando el nodo es hijo izquierdo del padre
+     * y el padre hijo derecho del abuelo.
+     * @param pNodo recibe el nodo a rotar
+     */
     private void ZigZag(NodoB pNodo){
         NodoB abuelo=pNodo.getPadre().getPadre();
         NodoB padre= pNodo.getPadre();
@@ -205,6 +211,12 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
             hder.setPadre(padre);
     }
     
+    /**
+     * metodo para hacer rotacion cuando el nodo es hijo izquierdo del padre y 
+     * el padre hijo derecho del abuelo.
+     * @param pNodo nodo que pertenece a la clase NodoUrl, se le ingresa el nodo
+     * a rotar.
+     */
     private void ZagZig(NodoB pNodo){
         NodoB abuelo=pNodo.getPadre().getPadre();
         NodoB padre= pNodo.getPadre();
@@ -291,23 +303,4 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
         //System.out.println("raiz: "+ _root.getDato());
     }
     
-    /**
-     * casos de prueba
-    public static void main(String[] args) {
-        long TI=System.nanoTime();
-        Arbol_splay nuevo = new Arbol_splay();
-        nuevo.insert(10);
-        nuevo.insert(5);
-        nuevo.insert(15);
-        nuevo.insert(13);
-        nuevo.insert(20);
-        nuevo.insert(19);
-        nuevo.insert(22);
-        //nuevo.print();
-        nuevo.insert(5);
-        nuevo.insert(10);
-        long TF=System.nanoTime();
-        System.out.println((TF-TI)*0.000001);
-        //nuevo.print();
-    }*/
 }

@@ -6,8 +6,10 @@
 //cambios es informacion minimos
 package Gui;
 
-import logica.ListaSdoble;
-import logica.Nodo;
+import Arboles.Arbol_splay;
+import Arboles.NodoB;
+import Listas.ListaSdoble;
+import Listas.Nodo;
 
 
 
@@ -21,14 +23,13 @@ public class ventana extends javax.swing.JFrame {
      * Creates new form ventana
      */
     
-    private ListaSdoble palabras;
-    private HelpScreen ayuda;
+    private HelpScreen _ayuda;
+    private Arbol_splay _busquedas;
     
     
     public ventana() {
-        ayuda= new HelpScreen();
-        palabras= new ListaSdoble();
-   
+        _ayuda= new HelpScreen();
+        _busquedas= new Arbol_splay();
         initComponents();
     }
 
@@ -122,7 +123,6 @@ public class ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         getTexto();
         search();
-        setInfo();
         VentanaOpciones listaDeOpciones;
         listaDeOpciones = new VentanaOpciones();
         listaDeOpciones.desplegar();
@@ -135,7 +135,7 @@ public class ventana extends javax.swing.JFrame {
     private void OPHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OPHelpActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        ayuda.setVisible(true);
+        _ayuda.setVisible(true);
     }//GEN-LAST:event_OPHelpActionPerformed
 
     private void OPConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OPConnectActionPerformed
@@ -143,31 +143,33 @@ public class ventana extends javax.swing.JFrame {
         //connect.setVisible(true);
     }//GEN-LAST:event_OPConnectActionPerformed
 
-    private void setInfo(){
-        
+    private void search() {
+        NodoB tmp =_busquedas.getRoot();
+        searchAux(tmp);
     }
     
-    private void search() {
-        Nodo tmp=palabras.getHead();
-        while(tmp!=null){
-            //SendM.sendMsj((String)tmp.getData());
-            tmp=tmp.getNext();
-        }
+    private void searchAux(NodoB pNodo){
+        if (pNodo!=null)
+            return;
+        searchAux(pNodo.getHizq());
+        //aqui va la vara para realizar busqueda
+        searchAux(pNodo.getHder());
     }
     
     private void getTexto(){
+        ListaSdoble _palabras= new ListaSdoble();
         String contenedor="";
         StringBuilder constructorS= new StringBuilder();
         int y=1;
         for(int x=0; x<=SearchInput.getText().length();x++){
             if(x==SearchInput.getText().length()){
                 contenedor=constructorS.toString();
-                palabras.enQueue(contenedor);
+                _palabras.enQueue(contenedor);
                 break;
             }
             else if(SearchInput.getText().substring(x,y).equals(" ")){
                 contenedor=constructorS.toString();
-                palabras.enQueue(contenedor);
+                _palabras.enQueue(contenedor);
                 y++;
                 constructorS.delete(0, constructorS.length());
             }
@@ -176,8 +178,15 @@ public class ventana extends javax.swing.JFrame {
                 y++;
             }
         }
-        palabras.print();
-        constructorS.delete(0, constructorS.length());
+        insertToTree(_palabras);
+    }
+    
+    private void insertToTree(ListaSdoble pPalabras){
+        Nodo tmp =pPalabras.getHead();
+        while(tmp!=null){
+            if(tmp.getData().compareTo(" ")!=0)
+                _busquedas.insert(tmp.getData());
+        }
     }
     
     /**

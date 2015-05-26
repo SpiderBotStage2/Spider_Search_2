@@ -1,4 +1,4 @@
-package spidersearchengine2;
+package logica;
 
 import java.io.File;
 import java.io.IOException;
