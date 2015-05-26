@@ -12,11 +12,17 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- *
+ *Clase que abre un archivo en el navegador o en el lector de documentos  
  * @author luis
  */
 public class SeleccionComoAbrirUrl {
-    
+    /**
+     * Metodo que verifica si el archivo es un documento en internet o si se 
+     * encuentra en una carpeta y abre dicho archivo
+     * @param pUrl String: direccion donde se encuentra el documento
+     * @throws IOException
+     * @throws URISyntaxException 
+     */
     public void abrirUrl(String pUrl) throws IOException, URISyntaxException{
         if (pUrl.substring(0,4).equals("http")){
             Desktop archivoDesktop = Desktop.getDesktop();
@@ -24,8 +30,7 @@ public class SeleccionComoAbrirUrl {
            
         }
         else{
-            File rutaEnDiscoDelArchivo = 
-                    new File ("/home/luis/Escritorio/Manual.pdf");
+            File rutaEnDiscoDelArchivo = new File (pUrl);
             Desktop.getDesktop().open(rutaEnDiscoDelArchivo);
         }
     
