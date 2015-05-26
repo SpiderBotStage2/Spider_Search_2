@@ -167,17 +167,17 @@ public class MetodosPArbolesSP extends Arbol_binario{
      * @param pNodo
      * @return un nodoB
      */
-    private NodoB minMax(NodoB pNodo){
+    private NodoKeyword minMax(NodoKeyword pNodo){
         if(pNodo.getHizq()==null)
             return pNodo;
         else if(pNodo.getHizq().getHizq()!=null)
-            return minMax(pNodo.getHizq());
+            return minMax((NodoKeyword)pNodo.getHizq());
         else 
             return pNodo;
     }
     
     /**
-     * meotodo de borrado para cualquier arbol diferente de un binario
+     * meotodo de borrado para cualquier arbol AVL
      * @param dato dato generico
      * @param pNodo el nodo raiz del arbol
      * @return retorna el nodo Aux convertido ahora en la raiz
@@ -203,9 +203,16 @@ public class MetodosPArbolesSP extends Arbol_binario{
             else if ((NodoKeyword)pNodo.getHder()==null)
                 return (NodoKeyword)pNodo.getHizq();
             else{
-                NodoKeyword Aux = (NodoKeyword)minMax(pNodo.getHder());
+                NodoKeyword Aux = minMax((NodoKeyword)pNodo.getHder());
+                NodoKeyword padre=(NodoKeyword)pNodo.getPadre();
                 if(Aux==pNodo.getHder()){
                     Aux.setHizq(pNodo.getHizq());
+                    if(padre!=null){
+                        if(padre.getHder()==pNodo)
+                            padre.setHder(Aux);
+                        else
+                            padre.setHizq(Aux);
+                    }
                     return Aux;
                 }
                 NodoKeyword menor= (NodoKeyword)Aux.getHizq();
@@ -217,15 +224,24 @@ public class MetodosPArbolesSP extends Arbol_binario{
                     Aux.setHizq((NodoKeyword)menor_hder);
                 else
                     Aux.setHder((NodoKeyword)menor_hder);
+                if(padre!=null){
+                        if(padre.getHder()==pNodo)
+                            padre.setHder(menor);
+                        else
+                            padre.setHizq(menor);
+                    }
                 return menor;
             }
         }
         else if(dato.LengthP()<pNodo.LengthP()){
             pNodo.setHizq(deleteSP(dato, (NodoKeyword)pNodo.getHizq()));
+            
+            pNodo.getHizq().setPadre(pNodo);
             return pNodo;
         }
         else{
             pNodo.setHder(deleteSP(dato, (NodoKeyword)pNodo.getHder()));
+            pNodo.getHder().setPadre(pNodo);
             return pNodo;
         }
     }

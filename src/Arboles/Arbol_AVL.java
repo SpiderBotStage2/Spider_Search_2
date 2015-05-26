@@ -237,4 +237,21 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
     public void print() {
         super.print(_root); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public static void main(String[] args) {
+        Arbol_AVL nuevo=new Arbol_AVL();
+        NodoKeyword Nuevo=new NodoKeyword("hola", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo1=new NodoKeyword("hola", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo2=new NodoKeyword("ya", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo3=new NodoKeyword("casi", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo4=new NodoKeyword("hola", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo5=new NodoKeyword("hola", new NodoLUrl("www", 0));
+        nuevo.insert(Nuevo);
+        nuevo.insert(Nuevo1);
+        nuevo.insert(Nuevo2);
+        nuevo.insert(Nuevo3);
+        nuevo.insert(Nuevo4);
+        nuevo.insert(Nuevo5);
+        nuevo.print();
+    }
 }
