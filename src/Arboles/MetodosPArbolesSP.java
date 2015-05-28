@@ -111,10 +111,10 @@ public class MetodosPArbolesSP extends Arbol_binario{
      */
     public NodoKeyword rotacionDDer(NodoKeyword pNodo){
         NodoKeyword padre= (NodoKeyword)pNodo.getPadre();
-        NodoKeyword hizqG= (NodoKeyword)pNodo.getHizq().getHder().getHizq();
-        NodoKeyword hderG= (NodoKeyword)pNodo.getHizq().getHder().getHder();
         NodoKeyword hizq= (NodoKeyword)pNodo.getHizq();
         NodoKeyword toHead= (NodoKeyword)pNodo.getHizq().getHder();
+        NodoKeyword hizqG= (NodoKeyword)pNodo.getHizq().getHder().getHizq();
+        NodoKeyword hderG= (NodoKeyword)pNodo.getHizq().getHder().getHder();
         toHead.setPadre(padre);
         toHead.setHizq(hizq);
         toHead.setHder(pNodo);
@@ -140,10 +140,10 @@ public class MetodosPArbolesSP extends Arbol_binario{
      */
     public NodoKeyword rotacionDIzq(NodoKeyword pNodo){
         NodoKeyword padre= (NodoKeyword)pNodo.getPadre();
-        NodoKeyword hizqG= (NodoKeyword)pNodo.getHder().getHizq().getHizq();
-        NodoKeyword hderG= (NodoKeyword)pNodo.getHder().getHizq().getHder();
         NodoKeyword hder= (NodoKeyword)pNodo.getHder();
         NodoKeyword toHead= (NodoKeyword)pNodo.getHder().getHizq();
+        NodoKeyword hizqG= (NodoKeyword)pNodo.getHder().getHizq().getHizq();
+        NodoKeyword hderG= (NodoKeyword)pNodo.getHder().getHizq().getHder();
         toHead.setPadre(padre);
         toHead.setHder(hder);
         toHead.setHizq(pNodo);

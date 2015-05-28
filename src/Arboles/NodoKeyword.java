@@ -45,8 +45,8 @@ public class NodoKeyword  extends NodoB{
      * @return retorna un dato de la clase NodoKeyword
      */
     @Override
-    public NodoB getPadre() {
-        return super.getPadre(); //To change body of generated methods, choose Tools | Templates.
+    public NodoKeyword getPadre() {
+        return (NodoKeyword)super.getPadre(); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -63,8 +63,8 @@ public class NodoKeyword  extends NodoB{
      * @return retorna un dato de la clase NodoKeyWord
      */
      @Override
-    public NodoB getHizq() {
-        return super.getHizq(); //To change body of generated methods, choose Tools | Templates.
+    public NodoKeyword getHizq() {
+        return (NodoKeyword)super.getHizq(); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -72,8 +72,8 @@ public class NodoKeyword  extends NodoB{
      * @return retorna un dato de la clase NodoKeyWord.
      */
     @Override
-    public NodoB getHder() {
-        return super.getHder(); //To change body of generated methods, choose Tools | Templates.
+    public NodoKeyword getHder() {
+        return (NodoKeyword)super.getHder(); //To change body of generated methods, choose Tools | Templates.
     }
 
     /***
@@ -107,8 +107,7 @@ public class NodoKeyword  extends NodoB{
      * metodo para establecer el padre del nodo
      * @param padre dato de la clase NodoLUrl
      */
-    @Override
-    public void setPadre(NodoB padre) {
+    public void setPadre(NodoKeyword padre) {
         super.setPadre(padre); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -116,8 +115,7 @@ public class NodoKeyword  extends NodoB{
      * metodo para establecer el hijo izquierdo del nodo.
      * @param hizq dato de la clase NodoKeyword.
      */
-    @Override
-    public void setHizq(NodoB hizq) {
+    public void setHizq(NodoKeyword hizq) {
         super.setHizq(hizq); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -125,8 +123,7 @@ public class NodoKeyword  extends NodoB{
      * metodo para establecer el hijo drecho del nodo.
      * @param hder dato de la clase NodoKeyword.
      */
-    @Override
-    public void setHder(NodoB hder) {
+    public void setHder(NodoKeyword hder) {
         super.setHder(hder); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -143,7 +140,6 @@ public class NodoKeyword  extends NodoB{
      * metodo para devolver la profundidad de los nodos.
      * @param depth dato tipo entero.
      */
-    @Override
     public void setDepth(int depth) {
         super.setDepth(depth); 
     }

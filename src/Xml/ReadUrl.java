@@ -58,9 +58,4 @@ public class ReadUrl extends MetodosPArbolesSP implements Constantes{
             e.printStackTrace();
         }
     }
-    
-    public static void main(String[] args) {
-        ReadUrl nuevo = new ReadUrl();
-        nuevo.readAll();
-    }
 }

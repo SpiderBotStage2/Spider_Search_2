@@ -28,7 +28,6 @@ public class ListaUrls{
      * metodo especial para encolar a la lista de Urls que recibe la 
      * urls que se quiere y se le ingresa el nivel de profundidad.
      * @param pDato la url que se ingresa 
-     * @param pDepth nivel de profundidad.
      */
     public void enQueue(NodoLUrl pDato){
         if(_head==null){
@@ -65,8 +64,7 @@ public class ListaUrls{
     
     /**
      * metodo para ingresar urls no repetidas
-     * @param dato
-     * @param depth 
+     * @param dato 
      */
     public void enQueue_none_repeat(NodoLUrl dato){
         NodoLUrl tmp= _head;
@@ -79,8 +77,7 @@ public class ListaUrls{
         if(!check){
             enQueue(dato);
         }
-        else
-            System.out.println("urlrepetida: "+ dato.getDato());
+            //System.out.println("urlrepetida: "+ dato.getDato());
     }
     
     /**

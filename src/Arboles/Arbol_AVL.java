@@ -49,11 +49,7 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
      */
     private void insertAux(NodoKeyword pDato, NodoKeyword pRaiz){
         if (pRaiz.LengthP()==pDato.LengthP()){
-            if(pRaiz.getDato().compareTo(pDato.getDato())<0){
-                overPlaceDer(pDato, pRaiz);
-            }
-            else
-                overPlaceIzq(pDato, pRaiz);
+            CheckForOverPlace(pDato, pRaiz);
         }
         else{
             if(pRaiz.LengthP()>pDato.LengthP()){   
@@ -72,6 +68,29 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
                 else
                     insertAux(pDato,(NodoKeyword)pRaiz.getHder());
             }
+        }
+    }
+    
+    private void CheckForOverPlace(NodoKeyword pDato, NodoKeyword pRaiz){
+        if(pRaiz.getDato().compareTo(pDato.getDato())<0){
+            if(pRaiz.getHder()!=null){
+                if(pRaiz.getHder().getDato().compareTo(pDato.getDato())>0)
+                    overPlaceDer(pDato, pRaiz);
+                else
+                    insertAux(pDato, (NodoKeyword)pRaiz.getHder());
+            }
+            else
+                overPlaceDer(pDato, pRaiz);
+        }
+        else{
+            if(pRaiz.getHizq()!=null){
+                if(pRaiz.getHizq().getDato().compareTo(pDato.getDato())>0)
+                    overPlaceIzq(pDato, pRaiz);
+                else
+                    insertAux(pDato, (NodoKeyword)pRaiz.getHizq());
+            }
+            else
+                overPlaceIzq(pDato, pRaiz);
         }
     }
     
@@ -226,7 +245,8 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
     }
     /**
      * 
-     * 
+     * *
+     * */
     public static void main(String[] args) {
         Arbol_AVL nuevo=new Arbol_AVL();
         NodoKeyword Nuevo=new NodoKeyword("hola", new NodoLUrl("www", 0));
@@ -240,9 +260,13 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
         NodoKeyword Nuevo9=new NodoKeyword("estoy", new NodoLUrl("www", 0));
         NodoKeyword Nuevo15=new NodoKeyword("hola", new NodoLUrl("www", 0));
         NodoKeyword Nuevo16=new NodoKeyword("hola", new NodoLUrl("www.y", 0));
+        NodoKeyword Nuevo44=new NodoKeyword("terminar", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo65=new NodoKeyword("de", new NodoLUrl("www.z", 0));
+        NodoKeyword Nuevo36=new NodoKeyword("tratar", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo13=new NodoKeyword("esta", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo14=new NodoKeyword("terminar", new NodoLUrl("www", 0));
         nuevo.insert(Nuevo);
         nuevo.insert(Nuevo1);
-        nuevo.insert(Nuevo2);
         nuevo.insert(Nuevo3);
         nuevo.insert(Nuevo4);
         nuevo.insert(Nuevo5);
@@ -253,6 +277,11 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
         nuevo.insert(Nuevo9);
         nuevo.insert(Nuevo15);
         nuevo.insert(Nuevo16);
+        nuevo.insert(Nuevo44);
+        nuevo.insert(Nuevo65);
+        //nuevo.insert(Nuevo36);
+        //nuevo.insert(Nuevo13);
+        //nuevo.insert(Nuevo14);
         nuevo.print();
-    }*/
+    }
 }

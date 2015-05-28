@@ -6,8 +6,6 @@
 package Arboles;
 
 import Listas.NodoLUrl;
-import java.io.File;
-import java.util.Arrays;
 import logica.LectorPDF;
 
 /**
@@ -18,58 +16,39 @@ public class Threadsqueprocesan implements Runnable {
 
     private Arbol_AVL KeywordsyRepeticiones = new Arbol_AVL();
     private String DireccionArchivoAProcesar;
+    
+    public Threadsqueprocesan( String Dirreccion,Arbol_AVL Keywords) {
+        DireccionArchivoAProcesar = Dirreccion;
+        KeywordsyRepeticiones=Keywords;
+    }
+    
     public Threadsqueprocesan( String Dirreccion) {
         DireccionArchivoAProcesar = Dirreccion;
     }
-
-   
+    
     public void run() {
-    
-    
-    String parrafoAProcesar = null;
-    LectorPDF pdf= new LectorPDF(DireccionArchivoAProcesar);
-    System.out.println(pdf.ContenidoDelArchivo);
-    
-    
-    String[] words = pdf.ContenidoDelArchivo.split("\\s+");
-    for (int i = 0; i < words.length; i++) {
-    // You may want to check for a non-word character before blindly
-    // performing a replacement
-    // It may also be necessary to adjust the character class
-        
-    }
-    NodoLUrl NodoUrl = new NodoLUrl (
-            DireccionArchivoAProcesar
-            ,1
-    );
-    System.out.println(Arrays.toString(words));
-    while(words != null) {
-        File NodoAInsertar = new File(words[0]);
-        System.out.println(words[0]);
-        
-        if (words.length>1){
-            
-            words = Arrays.copyOfRange(
-                    words, 
-                    1, 
-                    words.length
-            );
-        }
-       
-           
-                
-                NodoKeyword Keywords = new NodoKeyword(words[0],NodoUrl);
-                synchronized(KeywordsyRepeticiones){
-                KeywordsyRepeticiones.insert(Keywords);
+        String parrafoAProcesar = null;
+        LectorPDF pdf= new LectorPDF(DireccionArchivoAProcesar);
+        System.out.println(pdf.ContenidoDelArchivo);
+        String[] words = pdf.ContenidoDelArchivo.split("\\s+");
+        NodoLUrl NodoUrl = new NodoLUrl (DireccionArchivoAProcesar,1);
+        for (int i =0; i<words.length;i++){
+            if (words[i].length()>2){
+                try{
+                    insert(new NodoKeyword(words[i], NodoUrl));
+                }catch(StackOverflowError e){
+                    System.out.println("Error: out of stack");
                 }
-                        }
-        
-            
-                   
-                        
-                        }
-		
+            }
+        }
     }
+    
+    public void insert(NodoKeyword pNodo){
+        synchronized(this){
+            KeywordsyRepeticiones.insert(pNodo);
+        }
+    }
+}
 
    
 
