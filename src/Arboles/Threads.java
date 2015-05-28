@@ -16,14 +16,17 @@ import logica.LectorPDF;
  */
 public class Threads implements Runnable {
 
-   
+    private Arbol_AVL KeywordsyRepeticiones = new Arbol_AVL();
     public static String DireccionArchivoAProcesar;
-
+    
+   
     public void run() {
+    
+    
     String parrafoAProcesar = null;
     LectorPDF pdf= new LectorPDF(DireccionArchivoAProcesar);
     System.out.println(pdf.ContenidoDelArchivo);
-    Arbol_AVL KeywordsyRepeticiones = new Arbol_AVL();
+    
     
     String[] words = pdf.ContenidoDelArchivo.split("\\s+");
     for (int i = 0; i < words.length; i++) {
@@ -53,8 +56,9 @@ public class Threads implements Runnable {
            
                 
                 NodoKeyword Keywords = new NodoKeyword(words[0],NodoUrl);
+                synchronized(KeywordsyRepeticiones){
                 KeywordsyRepeticiones.insert(Keywords);
-                   
+                }
                         }
         
             
