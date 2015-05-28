@@ -38,7 +38,8 @@ public class CreaciondeHeapPorTamanoDeDocumentos {
                 HeapDeDocumentos.insert(ubicacion);
                 Threadsqueprocesan test1 = new Threadsqueprocesan (
                 ubicacion);
-		test1.run();	
+		test1.run();
+                
 		}
             else{
 			 System.out.println("File does not exists!");
