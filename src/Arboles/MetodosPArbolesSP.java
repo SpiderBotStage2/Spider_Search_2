@@ -182,7 +182,8 @@ public class MetodosPArbolesSP extends Arbol_binario{
      * @param pNodo dato de la clase NodoKeyword, se ingresa el nodo acomparacion.
      * @return retorna la nueva raiz del arbol, por si acaso se cambia o 
      * elimina la raiz.
-     */public NodoKeyword borrar(NodoKeyword pNodo){
+     */
+    public NodoKeyword borrar(NodoKeyword pNodo){
         if((NodoKeyword)pNodo.getHizq()==null)
             return (NodoKeyword)pNodo.getHder();
         else if ((NodoKeyword)pNodo.getHder()==null)
