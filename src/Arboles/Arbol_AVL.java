@@ -33,7 +33,7 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
             _root=pDato;
         else{
             NodoKeyword ifExist= exist(pDato, _root);
-            if (ifExist!=null && ifExist!=pDato)
+            if (ifExist!=null)
                 reLocate(ifExist, pDato);
             else
                 insertAux( pDato, _root);
@@ -161,27 +161,6 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
     }
     
     /**
-     * metodo para eliminar dato del arbol AVL.
-     * @param dato recibe un String como dato para eliminar.
-     */
-    public void delete(String dato) {
-        exist(dato);
-        super.delete(dato, _root);
-        check();
-    }
-    
-    /**
-     * metodo para encontrar un nodo en el arbol, utiliza el parametro de 
-     * busqueda en orden.
-     * @param pDato dato del tipo String, dato el cual buscaremos.
-     * @return retorna un nulo si no existe el nodo, un nodo completo si existe
-     * el nodo.
-     */
-    public NodoKeyword exist(String pDato) {
-        return super.exist(new NodoKeyword(pDato, new NodoLUrl("",0)), _root);
-    }
-    
-    /**
      * metodo para realizar una colocacion forzada en la izquierda por 
      * si una palabra tiene la misma cantidad de datos que otra.
      * @param pNodo dato que incialmente el padre de donde va ingresar
@@ -222,8 +201,16 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
      * representar al que se va a mover.
      */
     private void reLocate(NodoKeyword pDato, NodoKeyword newInsert){
-        _root=delete(pDato, _root);
-        newInsert.SumCont(uno);
+        NodoKeyword padre= (NodoKeyword)pDato.getPadre();
+        if(padre!=null){
+            if(padre.getHder()==pDato)
+                padre.setHder(borrar(pDato));
+            else
+                padre.setHizq(borrar(pDato));
+        }else{
+            _root=borrar(pDato);
+        }
+        newInsert.SumCont(pDato.getCont());
         newInsert.getListaUrls().enQueue_none_repeat(
                 pDato.getListaUrls().getHead());
         insert(newInsert);
@@ -242,16 +229,29 @@ public class Arbol_AVL  extends MetodosPArbolesSP implements Constantes{
         Arbol_AVL nuevo=new Arbol_AVL();
         NodoKeyword Nuevo=new NodoKeyword("hola", new NodoLUrl("www", 0));
         NodoKeyword Nuevo1=new NodoKeyword("hola", new NodoLUrl("www", 0));
-        NodoKeyword Nuevo2=new NodoKeyword("ya", new NodoLUrl("www", 0));
-        NodoKeyword Nuevo3=new NodoKeyword("casi", new NodoLUrl("www", 0));
-        NodoKeyword Nuevo4=new NodoKeyword("hola", new NodoLUrl("www", 0));
-        NodoKeyword Nuevo5=new NodoKeyword("hola", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo2=new NodoKeyword("mierda", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo3=new NodoKeyword("esta", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo4=new NodoKeyword("terminar", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo5=new NodoKeyword("de", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo6=new NodoKeyword("tratar", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo7=new NodoKeyword("para", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo8=new NodoKeyword("listo", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo9=new NodoKeyword("estoy", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo15=new NodoKeyword("hola", new NodoLUrl("www", 0));
+        NodoKeyword Nuevo16=new NodoKeyword("hola", new NodoLUrl("www.y", 0));
         nuevo.insert(Nuevo);
         nuevo.insert(Nuevo1);
         nuevo.insert(Nuevo2);
         nuevo.insert(Nuevo3);
         nuevo.insert(Nuevo4);
         nuevo.insert(Nuevo5);
+        nuevo.insert(Nuevo5);
+        nuevo.insert(Nuevo6);
+        nuevo.insert(Nuevo7);
+        nuevo.insert(Nuevo8);
+        nuevo.insert(Nuevo9);
+        nuevo.insert(Nuevo15);
+        nuevo.insert(Nuevo16);
         nuevo.print();
     }
 }

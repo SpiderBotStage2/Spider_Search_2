@@ -204,16 +204,8 @@ public class MetodosPArbolesSP extends Arbol_binario{
                 return (NodoKeyword)pNodo.getHizq();
             else{
                 NodoKeyword Aux = minMax((NodoKeyword)pNodo.getHder());
-                NodoKeyword padre=(NodoKeyword)pNodo.getPadre();
                 if(Aux==pNodo.getHder()){
-                    pNodo.getHizq().setPadre(Aux);
                     Aux.setHizq(pNodo.getHizq());
-                    if(padre!=null){
-                        if(padre.getHder()==pNodo)
-                            padre.setHder(Aux);
-                        else
-                            padre.setHizq(Aux);
-                    }
                     return Aux;
                 }
                 NodoKeyword menor= (NodoKeyword)Aux.getHizq();
@@ -223,32 +215,52 @@ public class MetodosPArbolesSP extends Arbol_binario{
                 pNodo.setHder((NodoKeyword)menor_hder);
                 if((NodoKeyword)Aux.getHizq()==menor){
                     Aux.setHizq((NodoKeyword)menor_hder);
-                    menor_hder.setPadre(Aux);
                 }
                 else{
                     Aux.setHder((NodoKeyword)menor_hder);
-                    menor_hder.setPadre(Aux);
-                    if(padre!=null){
-                        if(padre.getHder()==pNodo)
-                            padre.setHder(menor);
-                        else
-                            padre.setHizq(menor);
-                    }
                 }
                 return menor;
             }
         }
         else if(dato.LengthP()<pNodo.LengthP()){
             pNodo.setHizq(deleteSP(dato, (NodoKeyword)pNodo.getHizq()));
-            if(pNodo.getHizq()!=null)
-                pNodo.getHizq().setPadre(pNodo);
             return pNodo;
         }
         else{
             pNodo.setHder(deleteSP(dato, (NodoKeyword)pNodo.getHder()));
-            if(pNodo.getHder()!=null)
-                pNodo.getHder().setPadre(pNodo);
             return pNodo;
+        }
+    }
+
+    
+    public NodoKeyword borrar(NodoKeyword pNodo){
+        if((NodoKeyword)pNodo.getHizq()==null)
+            return (NodoKeyword)pNodo.getHder();
+        else if ((NodoKeyword)pNodo.getHder()==null)
+            return (NodoKeyword)pNodo.getHizq();
+        else{
+            NodoKeyword Aux = minMax((NodoKeyword)pNodo.getHder());
+            if(Aux==pNodo.getHder()){
+                ((NodoKeyword)pNodo.getHizq()).setPadre(Aux);
+                Aux.setHizq(pNodo.getHizq());
+                return Aux;
+            }
+            NodoKeyword menor= (NodoKeyword)Aux.getHizq();
+            ((NodoKeyword)pNodo.getHizq()).setPadre(menor);
+            menor.setHizq((NodoKeyword)pNodo.getHizq());
+            NodoKeyword menor_hder= (NodoKeyword)menor.getHder();
+            ((NodoKeyword)pNodo.getHder()).setPadre(menor);
+            menor.setHder((NodoKeyword)pNodo.getHder());
+            pNodo.setHder((NodoKeyword)menor_hder);
+            if((NodoKeyword)Aux.getHizq()==menor){
+                Aux.setHizq((NodoKeyword)menor_hder);
+            }
+            else{
+                Aux.setHder((NodoKeyword)menor_hder);
+            }
+            if(menor_hder!=null)
+                    menor_hder.setPadre(Aux);
+            return menor;
         }
     }
     

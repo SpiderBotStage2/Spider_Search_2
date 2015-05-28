@@ -80,7 +80,7 @@ public class ListaUrls{
             enQueue(dato);
         }
         else
-            System.out.println("urlrepetida: "+ dato);
+            System.out.println("urlrepetida: "+ dato.getDato());
     }
     
     /**
