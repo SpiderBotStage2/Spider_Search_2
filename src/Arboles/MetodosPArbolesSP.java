@@ -177,63 +177,12 @@ public class MetodosPArbolesSP extends Arbol_binario{
     }
     
     /**
-     * meotodo de borrado para cualquier arbol AVL
-     * @param dato dato generico
-     * @param pNodo el nodo raiz del arbol
-     * @return retorna el nodo Aux convertido ahora en la raiz
-     */
-    public NodoKeyword delete(NodoKeyword dato, NodoKeyword pNodo){
-        if(pNodo==null)
-            return null;
-        return deleteSP(dato, pNodo);
-    }
-    
-    /**
      * metodo especial, recursivo, que se utiliza para eliminar un nodo en el 
-     * arbol AVL.
-     * @param dato dato de la clase NodoKeyword, se le ingresa el nodo a eliminar.
+     * arbol AVL
      * @param pNodo dato de la clase NodoKeyword, se ingresa el nodo acomparacion.
      * @return retorna la nueva raiz del arbol, por si acaso se cambia o 
      * elimina la raiz.
-     */
-    private NodoKeyword deleteSP(NodoKeyword dato, NodoKeyword pNodo){
-        if(pNodo.getDato().equals(dato.getDato())){
-            if((NodoKeyword)pNodo.getHizq()==null)
-                return (NodoKeyword)pNodo.getHder();
-            else if ((NodoKeyword)pNodo.getHder()==null)
-                return (NodoKeyword)pNodo.getHizq();
-            else{
-                NodoKeyword Aux = minMax((NodoKeyword)pNodo.getHder());
-                if(Aux==pNodo.getHder()){
-                    Aux.setHizq(pNodo.getHizq());
-                    return Aux;
-                }
-                NodoKeyword menor= (NodoKeyword)Aux.getHizq();
-                menor.setHizq((NodoKeyword)pNodo.getHizq());
-                NodoKeyword menor_hder= (NodoKeyword)menor.getHder();
-                menor.setHder((NodoKeyword)pNodo.getHder());
-                pNodo.setHder((NodoKeyword)menor_hder);
-                if((NodoKeyword)Aux.getHizq()==menor){
-                    Aux.setHizq((NodoKeyword)menor_hder);
-                }
-                else{
-                    Aux.setHder((NodoKeyword)menor_hder);
-                }
-                return menor;
-            }
-        }
-        else if(dato.LengthP()<pNodo.LengthP()){
-            pNodo.setHizq(deleteSP(dato, (NodoKeyword)pNodo.getHizq()));
-            return pNodo;
-        }
-        else{
-            pNodo.setHder(deleteSP(dato, (NodoKeyword)pNodo.getHder()));
-            return pNodo;
-        }
-    }
-
-    
-    public NodoKeyword borrar(NodoKeyword pNodo){
+     */public NodoKeyword borrar(NodoKeyword pNodo){
         if((NodoKeyword)pNodo.getHizq()==null)
             return (NodoKeyword)pNodo.getHder();
         else if ((NodoKeyword)pNodo.getHder()==null)
